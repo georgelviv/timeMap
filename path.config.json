@@ -1,0 +1,6 @@
+{
+  "buildDir": "build",
+  "frontDir": "app/front",
+  "backendDir": "app/back",
+  "prodDir": "prod"
+}
