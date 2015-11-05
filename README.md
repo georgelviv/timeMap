@@ -1,8 +1,6 @@
 # timeMap
------
 
 Magic starts here.
-
 
 -----
 
@@ -20,5 +18,3 @@ $ gulp build     // To build develop file
 $ gulp develop   // To develop (build develop and run watchers)
 $ gulp clean     // To delete build and production folders
 ```
-
-
