@@ -13,4 +13,7 @@ function defaultTask () {
   gutil.log(gutil.colors.cyan('$ gulp build'));
   gutil.log('To clean, run:');
   gutil.log(gutil.colors.cyan('$ gulp clean'));
+  gutil.log('To run test runner, run:');
+  gutil.log(gutil.colors.cyan('$ gulp test'));
+
 }
