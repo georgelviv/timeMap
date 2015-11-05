@@ -1,4 +1,6 @@
 node_modules/
+test/src
 app/front/vendor/
 build/
 prod/
+test/*.html

@@ -31,7 +31,9 @@ function jsTask () {
     .pipe(jscs())
     .pipe(jscs.reporter())
     .pipe(sourcemaps.init())
-    .pipe(ngAnnotate())
+    .pipe(ngAnnotate({
+      single_quotes: true
+    }))
     .pipe(concat('app.js'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(path.buildDir))

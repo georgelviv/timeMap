@@ -2,5 +2,7 @@
   "buildDir": "build",
   "frontDir": "app/front",
   "backendDir": "app/back",
-  "prodDir": "prod"
+  "prodDir": "prod",
+  "bowerDir": "app/front/vendor",
+  "testDir": "test"
 }

@@ -1,3 +1,3 @@
 <section class="main">
-  Hello
+  Hello World
 </section>
