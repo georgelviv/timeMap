@@ -4,7 +4,8 @@ var path = require('../path.config');
 
 var sourcePath = [
   path.buildDir,
-  path.prodDir
+  path.prodDir,
+  path.testDir + '/build'
 ];
 
 module.exports = cleanTask;

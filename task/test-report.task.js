@@ -5,17 +5,18 @@ var openBrowser = require('gulp-open');
 var path = require('../path.config');
 
 var srcFile = path.testDir + '/template/test-runner.html';
+var pathPrefix = '/build/src/';
 
 var srcFiles = [
-  path.testDir + '/src/jasmine.css',
-  path.testDir + '/src/jasmine.js',
-  path.testDir + '/src/jasmine-html.js',
-  path.testDir + '/src/boot.js',
-  path.testDir + '/src/vendor.js',
-  path.testDir + '/src/angular-mocks.js',
-  path.testDir + '/src/templates.js',
-  path.testDir + '/src/app.js',
-  path.testDir + '/src/spec.js',
+  path.testDir + pathPrefix + 'jasmine.css',
+  path.testDir + pathPrefix + 'jasmine.js',
+  path.testDir + pathPrefix + 'jasmine-html.js',
+  path.testDir + pathPrefix + 'boot.js',
+  path.testDir + pathPrefix + 'vendor.js',
+  path.testDir + pathPrefix + 'angular-mocks.js',
+  path.testDir + pathPrefix + 'templates.js',
+  path.testDir + pathPrefix + 'app.js',
+  path.testDir + pathPrefix + 'spec.js',
 ];
 
 
@@ -25,9 +26,9 @@ module.exports.srcFiles = srcFile;
 function testTask () {
   gulp.src(srcFile)
     .pipe(inject(gulp.src(srcFiles, {read: false}), {
-      ignorePath: 'test',
+      ignorePath: 'test/build',
       addRootSlash: false
     }))
-    .pipe(gulp.dest(path.testDir))
+    .pipe(gulp.dest(path.testDir + '/build'))
     .pipe(openBrowser());
 }

@@ -1,6 +1,5 @@
 node_modules/
-test/src
+test/build
 app/front/vendor/
 build/
 prod/
-test/*.html

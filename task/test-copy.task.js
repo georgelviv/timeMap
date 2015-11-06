@@ -17,5 +17,5 @@ module.exports = testCopyTask;
 
 function testCopyTask () {
   gulp.src(srcFiles)
-    .pipe(gulp.dest(path.testDir + '/src'));
+    .pipe(gulp.dest(path.testDir + '/build/src'));
 }
