@@ -4,7 +4,7 @@
   "description": "Helps you to discover events over time through the map",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test-run"
   },
   "author": "",
   "license": "ISC",
