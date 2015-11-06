@@ -1,5 +1,6 @@
 # timeMap
 [<img src="https://travis-ci.org/georgelviv/timeMap.svg?branch=master">](https://travis-ci.org/georgelviv/timeMap)
+
 Magic starts here.
 
 -----
