@@ -1,4 +1,5 @@
 # timeMap
+![alt text](https://travis-ci.org/georgelviv/timeMap.svg?branch=master "Travis-Cli")
 
 Magic starts here.
 
