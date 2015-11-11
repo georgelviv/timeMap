@@ -61,6 +61,7 @@
         "io": false,
         "describe": false,
         "it": false,
-        "expect": false
+        "expect": false,
+        "beforeEach": false
     }
 }

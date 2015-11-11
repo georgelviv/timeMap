@@ -1,5 +1,7 @@
-describe('A suite', function() {
-  it('contains spec with an expectation', function() {
-    expect(true).toBe(true);
+describe('App ', function() {
+  beforeEach(module('app'));
+
+  it('should depend on existing modules', function() {
+    expect(true).toBe(false);
   });
 });
