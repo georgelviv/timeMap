@@ -1,22 +1,16 @@
 var gulp = require('gulp');
-var karma = require('gulp-karma');
+var path = require('path');
+var Server = require('karma').Server;
 
-var path = require('../path.config');
-
-var srcFiles = path.testDir + '/build/src/spec.js';
+var configFile = path.join(__dirname, '..', '/karma.conf.js');
 
 
 module.exports = testJasmineTask;
-module.exports.srcFiles = srcFiles;
 
-function testJasmineTask () {
-  gulp.src(srcFiles)
-  .pipe(karma({
-    configFile: 'karma.conf.js',
-    action: 'run'
-  }))
-  .on('error', function (err) {
-    console.log(err);
-    throw new Error('Karma: test fail');
-  });
+function testJasmineTask (done) {
+  return new Server({
+    configFile: configFile,
+    singleRun: true
+  }, done)
+  .start();
 }
