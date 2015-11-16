@@ -12,10 +12,6 @@ var srcFiles = [
   path.testDir + pathPrefix + 'jasmine.js',
   path.testDir + pathPrefix + 'jasmine-html.js',
   path.testDir + pathPrefix + 'boot.js',
-  path.testDir + pathPrefix + 'vendor.js',
-  path.testDir + pathPrefix + 'angular-mocks.js',
-  path.testDir + pathPrefix + 'templates.js',
-  path.testDir + pathPrefix + 'app.js',
   path.testDir + pathPrefix + 'spec.js',
 ];
 
