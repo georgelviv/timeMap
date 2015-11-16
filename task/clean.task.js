@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var clean = require('gulp-clean');
+var rimraf = require('rimraf');
 var path = require('../path.config');
 
 var sourcePath = [
@@ -12,5 +12,5 @@ module.exports = cleanTask;
 
 function cleanTask () {
     return gulp.src(sourcePath, {read: false})
-          .pipe(clean());
+          .pipe(rimraf());
 }

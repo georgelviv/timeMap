@@ -15,9 +15,8 @@ function testJasmineTask () {
     configFile: 'karma.conf.js',
     action: 'run'
   }))
-  .on('error', function(err) {
+  .on('error', function (err) {
     console.log(err);
-    this.emit('end');
-    process.exit.bind(process, 1);
+    throw new Error('Karma: test fail');
   });
 }
