@@ -18,5 +18,6 @@ function testJasmineTask () {
   .on('error', function(err) {
     console.log(err);
     this.emit('end');
+    process.exit.bind(process, 1);
   });
 }
