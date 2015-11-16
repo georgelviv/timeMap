@@ -22,7 +22,7 @@ gulp.task('build-test', function () {
 });
 
 gulp.task('test-run', function () {
-    runSequence('delay', 'test-concat', 'delay', 'test-jasmine');
+    runSequence('delay', 'test-concat', 'delay', 'test-karma');
 });
 
 gulp.task('test', function () {
@@ -42,7 +42,7 @@ gulp.task('inject', require('./task/inject.task'));
 gulp.task('inject-prod', require('./task/inject.task').prod);
 gulp.task('delay', require('./task/delay.task'));
 gulp.task('test-copy', require('./task/test-copy.task'));
-gulp.task('test-jasmine', require('./task/test-jasmine.task'));
 gulp.task('test-concat', require('./task/test-concat.task'));
+gulp.task('test-karma', require('./task/test-karma.task'));
 gulp.task('test-report', require('./task/test-report.task'));
 gulp.task('watch', require('./task/watch.task'));

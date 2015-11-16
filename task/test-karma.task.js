@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var jasmineBrowser = require('gulp-jasmine-browser');
+var karma = require('gulp-karma');
 
 var path = require('../path.config');
 
@@ -11,9 +11,12 @@ module.exports.srcFiles = srcFiles;
 
 function testJasmineTask () {
   gulp.src(srcFiles)
-  .pipe(jasmineBrowser.specRunner({console: true}))
-  .pipe(jasmineBrowser.headless())
-  .on('error', function () {
-    throw new Error();
+  .pipe(karma({
+    configFile: 'karma.conf.js',
+    action: 'run'
+  }))
+  .on('error', function(err) {
+    console.log(err);
+    this.emit('end');
   });
 }
