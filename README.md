@@ -6,7 +6,9 @@ Magic starts here.
 -----
 
 Before you run project, you need to install npm and bower dependencies.
-Please ensure, you have already installed bower and gulp globally.
+Please ensure, you have already installed bower and gulp globally. 
+Also to be able to run tests, please install localy phantomjs
+http://phantomjs.org/
 ```
 $ npm install
 $ bower install
@@ -16,7 +18,7 @@ Gulp commands
 ```
 $ gulp prod      // To build production files
 $ gulp build     // To build develop file
-$ gulp develop   // To develop (build develop and run watchers)
+$ gulp develop   // To develop (build develop, run watchers and tests with karma)
 $ gulp clean     // To delete build and production folders
 $ gulp test      // To run test runner
 ```
