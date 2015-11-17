@@ -62,6 +62,7 @@
         "describe": false,
         "it": false,
         "expect": false,
-        "beforeEach": false
+        "beforeEach": false,
+        "inject": false
     }
 }

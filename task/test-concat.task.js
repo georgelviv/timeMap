@@ -8,11 +8,11 @@ var srcFiles = [
   path.frontDir + '/vendor/angular-mocks/angular-mocks.js',
   path.buildDir + '/templates.js',
   path.buildDir + '/app.js',
-  path.frontDir + '/app/*.spec.js'
+  path.frontDir + '/app/**/*.spec.js'
 ];
 
 module.exports = testConcatTask;
-module.exports.srcFiles = path.frontDir + '/app/*.spec.js';
+module.exports.srcFiles = path.frontDir + '/app/**/*.spec.js';
 
 function testConcatTask () {
   gulp.src(srcFiles)

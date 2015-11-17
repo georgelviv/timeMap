@@ -20,7 +20,7 @@ module.exports = function(config) {
       path.frontDir + '/vendor/angular-mocks/angular-mocks.js',
       path.buildDir + '/templates.js',
       path.buildDir + '/app.js',
-      path.frontDir + '/app/*.spec.js'
+      path.frontDir + '/app/**/*.spec.js'
     ],
 
 
