@@ -3,9 +3,9 @@
 
   angular
     .module('app')
-    .run(AppCtrl);
+    .run(AppRun);
 
-  function AppCtrl($rootScope) {
+  function AppRun($rootScope) {
     $rootScope.$on('$routeChangeSuccess', onRouteChangeSuccess);
 
     function onRouteChangeSuccess(event, current, previous) {

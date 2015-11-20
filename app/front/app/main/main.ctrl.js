@@ -5,14 +5,17 @@
     .module('app.main')
     .controller('MainCtrl', MainController);
 
-  function MainController(logger) {
+  function MainController(loggerApi, spinnerApi) {
     var vm = this;
+    vm.toogle = spinnerApi.toogle;
 
     activate();
 
     function activate() {
-      logger.info('app.main activated');
+      loggerApi.info('app.main activated');
     }
+
+
 
   }
 })();

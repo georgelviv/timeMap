@@ -5,7 +5,8 @@
     .module('app.main', [
       'ngRoute',
       'templates',
-      'utils.logger'
+      'utils.logger',
+      'utils.spinner'
     ]);
 
 })();

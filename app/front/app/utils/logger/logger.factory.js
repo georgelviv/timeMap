@@ -3,9 +3,9 @@
 
   angular
     .module('utils.logger')
-    .factory('logger', logger);
+    .factory('loggerApi', loggerApi);
 
-  function logger() {
+  function loggerApi() {
       var service = {
         info: info
       };

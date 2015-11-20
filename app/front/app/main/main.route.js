@@ -9,7 +9,7 @@
     $routeProvider.
       when('/', {
         templateUrl: 'main/main.tpl',
-        controller: 'MainCtrl as main',
+        controller: 'MainCtrl as vm',
         title: 'Main'
       })
       .otherwise({
