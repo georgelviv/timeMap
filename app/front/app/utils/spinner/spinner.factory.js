@@ -15,7 +15,6 @@
 
       var isShowed = false;
 
-
       return service;
 
       function show() {

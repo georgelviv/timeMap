@@ -3,7 +3,8 @@
 
   angular
     .module('app', [
-      'app.main'
+      'app.main',
+      'utils.exceptionHandler'
     ]);
 
 })();

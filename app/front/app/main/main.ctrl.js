@@ -13,9 +13,8 @@
 
     function activate() {
       loggerApi.info('app.main activated');
+      throw new Error('Annoying Error');
     }
-
-
 
   }
 })();

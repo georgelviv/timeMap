@@ -13,6 +13,12 @@ describe('utils.logger', function () {
     it('should have info function', function () {
       expect(angular.isFunction(loggerApi.info)).toBe(true);
     });
+    it('should have error function', function () {
+      expect(angular.isFunction(loggerApi.error)).toBe(true);
+    });
+    it('should have success function', function () {
+      expect(angular.isFunction(loggerApi.success)).toBe(true);
+    });
   });
 
 });
