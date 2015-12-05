@@ -22,3 +22,8 @@ $ gulp develop   // To develop (build develop, run watchers and tests with karma
 $ gulp clean     // To delete build and production folders
 $ gulp test      // To run test runner
 ```
+
+To boot backend part of app
+```
+$ node boot     // To boot app
+```
