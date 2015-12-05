@@ -12,7 +12,7 @@
         success: success
       };
 
-      toastr.options.timeOut = 3000;
+      toastr.options.timeOut = 10000;
 
       return service;
 

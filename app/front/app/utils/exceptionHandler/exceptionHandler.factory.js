@@ -17,8 +17,10 @@
           cause: cause
         });
 
-        loggerApi.error(exception.message, 'Error');
-        console.error(exception, cause);
+        if (exception.message) {
+          loggerApi.error(exception.message, 'Error');
+        }
+        console.error('App Error:', exception, cause);
       }
     }
 })();

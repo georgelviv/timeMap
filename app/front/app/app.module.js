@@ -4,7 +4,8 @@
   angular
     .module('app', [
       'app.main',
-      'utils.exceptionHandler'
+      'utils.exceptionHandler',
+      'utils.interceptor'
     ]);
 
 })();
