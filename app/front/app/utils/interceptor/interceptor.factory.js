@@ -19,7 +19,6 @@
       return interceptor;
 
       function request(config) {
-        
         return config;
       }
 
