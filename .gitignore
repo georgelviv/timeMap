@@ -3,3 +3,4 @@ test/build
 app/front/vendor/
 build/
 prod/
+.idea/
