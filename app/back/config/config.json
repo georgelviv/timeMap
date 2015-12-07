@@ -1,0 +1,11 @@
+{
+  "port": "3000",
+  "mongoose": {
+    "production":{
+      "uri": "mongodb://admin:admin@ds027415.mongolab.com:27415/timemap"
+    },
+    "development": {
+       "uri": "mongodb://localhost:27017/timemap"
+    }
+  }
+}

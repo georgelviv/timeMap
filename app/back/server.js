@@ -1,5 +1,6 @@
 var express = require('express');
-var pathConfig = require('../../path.config');
+var pathConfig = require('../../path.config'),
+    config = require("./config");
 
 var server = {
   init: init,
@@ -8,7 +9,7 @@ var server = {
 var isInited = false;
 module.exports = server;
 
-server.port = process.argv[2] || 3000;
+server.port = process.argv[2] || config.get("port");
 
 function init() {
   if (isInited) {
@@ -22,6 +23,6 @@ function init() {
 
 function listen() {
   server.serverInstance = server.app.listen(server.port, function listenPort() {
-    console.log('Listen on port:' + server.serverInstance.address().port);
+    console.log('Listen on port:' + server.serverInstance.address().port + ", " + config.get('NODE_ENV')+ " mode");
   });
 }
