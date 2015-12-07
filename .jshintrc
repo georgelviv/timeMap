@@ -64,6 +64,7 @@
         "expect": false,
         "beforeEach": false,
         "inject": false,
-        "console": false
+        "console": false,
+        "afterEach": false
     }
 }
