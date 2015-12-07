@@ -3,7 +3,7 @@ var server = require('./server');
 var pathConfig = require('../../path.config');
 
 var route = {
-  init: init,
+  init: init
 };
 
 var isInited = false;
