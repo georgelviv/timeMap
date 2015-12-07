@@ -4,3 +4,4 @@ app/front/vendor/
 build/
 prod/
 .idea/
+.DS_Store
