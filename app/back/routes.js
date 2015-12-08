@@ -1,9 +1,10 @@
 var path = require('path');
 var server = require('./server');
 var pathConfig = require('../../path.config');
+var User = require("./models/user").User;
 
 var route = {
-  init: init,
+  init: init
 };
 
 var isInited = false;
@@ -19,6 +20,21 @@ function init() {
 
   server.app.get('/articles', function (req, res) {
     res.sendFile(mainPage);
+  });
+
+  server.app.get("/", function(req,res){
+    var user = new User({
+      username: "Petro" + Math.floor((Math.random() * 100) + 1),
+      age: Math.floor((Math.random() * 80) + 1)
+    });
+    user.save(function(err, user){
+      if (err){
+        console.log(err);
+        res.send(500,"something went wrong...")
+      }else{
+        res.send(user.introducing());
+      }
+    })
   });
 
   server.app.get('*', function (req, res) {
