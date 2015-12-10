@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var templateCache = require('gulp-angular-templatecache');
 var livereload = require('gulp-livereload');
 
-var path = require('../path.config');
+var path = require('../config').path;
 
 var srcFiles = path.frontDir + '/app/**/*.tpl';
 

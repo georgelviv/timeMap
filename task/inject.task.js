@@ -1,7 +1,7 @@
 var gulp = require('gulp');
-var inject = require('gulp-inject');
 var livereload = require('gulp-livereload');
-var path = require('../path.config');
+var gulpInject = require('gulp-inject');
+var path = require('../config').path;
 
 var srcFile = path.frontDir + '/index.html';
 
@@ -24,7 +24,7 @@ module.exports.srcFiles = srcFile;
 
 function injectTask () {
   gulp.src(srcFile)
-    .pipe(inject(gulp.src(srcFiles, {read: false}), {
+    .pipe(gulpInject(gulp.src(srcFiles, {read: false}), {
       ignorePath: 'build',
       addRootSlash: false
     }))
@@ -34,7 +34,7 @@ function injectTask () {
 
 function injectTaskProd () {
   gulp.src(srcFile)
-    .pipe(inject(gulp.src(srcFilesProd, {read: false}), {
+    .pipe(gulpInject(gulp.src(srcFilesProd, {read: false}), {
       ignorePath: 'prod',
       addRootSlash: false
     }))

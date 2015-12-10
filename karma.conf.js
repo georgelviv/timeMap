@@ -1,6 +1,6 @@
 // Karma configuration
 // Generated on Mon Nov 16 2015 15:21:05 GMT+0200 (FLE Standard Time)
-var path = require('./path.config');
+var path = require('./config').path;
 
 module.exports = function(config) {
   config.set({

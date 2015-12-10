@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var rimraf = require('rimraf');
-var path = require('../path.config');
+var path = require('../config').path;
 
 var sourcePath = [
   path.buildDir,

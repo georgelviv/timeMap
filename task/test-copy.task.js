@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var path = require('../path.config');
+var path = require('../config').path;
 
 var srcFiles = [
   path.frontDir + '/vendor/jasmine-core/lib/jasmine-core/jasmine.css',

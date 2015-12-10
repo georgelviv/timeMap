@@ -7,7 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var livereload = require('gulp-livereload');
 
-var path = require('../path.config');
+var path = require('../config').path;
 
 var srcFiles = [
   path.frontDir + '/app/**/*.module.js',

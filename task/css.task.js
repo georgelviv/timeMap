@@ -3,7 +3,7 @@ var stylus = require('gulp-stylus');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCss = require('gulp-minify-css');
 var livereload = require('gulp-livereload');
-var path = require('../path.config');
+var path = require('../config').path;
 
 var srcFiles = path.frontDir + '/styl/main.styl';
 var buildFile = [

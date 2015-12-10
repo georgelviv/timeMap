@@ -1,8 +1,8 @@
 var gulp = require('gulp');
-var inject = require('gulp-inject');
+var gulpInject = require('gulp-inject');
 var openBrowser = require('gulp-open');
 
-var path = require('../path.config');
+var path = require('../config').path;
 
 var srcFile = path.testDir + '/template/test-runner.html';
 var pathPrefix = '/build/src/';
@@ -21,7 +21,7 @@ module.exports.srcFiles = srcFile;
 
 function testTask () {
   gulp.src(srcFile)
-    .pipe(inject(gulp.src(srcFiles, {read: false}), {
+    .pipe(gulpInject(gulp.src(srcFiles, {read: false}), {
       ignorePath: 'test/build',
       addRootSlash: false
     }))

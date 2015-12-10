@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
 
-var path = require('../path.config');
+var path = require('../config').path;
 
 module.exports = watchTask;
 

@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 
-var path = require('../path.config');
+var path = require('../config').path;
 var vendorArr = [
 	'toastr/toastr.css'
 ];

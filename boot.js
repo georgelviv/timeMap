@@ -1,7 +1,9 @@
-var pathConfig = require('./path.config');
+var pathConfig = require('./config').path;
+var config = require('./' + pathConfig.backendDir + '/config');
 var server = require('./' + pathConfig.backendDir + '/server');
-var routes = require('./' + pathConfig.backendDir + '/routes');
+var db = require('./' + pathConfig.backendDir + '/db');
 
+config.init();
+db.init();
 server.init();
-routes.init();
 server.listen();
