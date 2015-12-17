@@ -25,8 +25,7 @@ function init() {
 }
 
 function handle404(req, res) {
-  // In future should be 404
-  res.redirect('/');
+  res.redirect('/#' + req.url);
 }
 
 function onHello(req,res) {

@@ -8,12 +8,9 @@
   function mainRouter($routeProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: 'main/main.tpl',
+        templateUrl: 'core/main/main.tpl',
         controller: 'MainCtrl as vm',
         title: 'Main'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
   }
 

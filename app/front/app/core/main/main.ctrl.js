@@ -15,11 +15,6 @@
 
     function activate() {
       loggerApi.info('app.main activated');
-      $http.get(apiExample)
-      .success(function(data) {
-        console.log(data);
-        loggerApi.info(data, 'Data');
-      });
       // throw new Error('Annoying Error');
     }
 
