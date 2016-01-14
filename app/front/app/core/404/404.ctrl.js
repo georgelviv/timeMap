@@ -17,8 +17,15 @@
     function getUrlPath(url) {
       var path = url;
       path = path.split('/');
-      path = path[path.length- 1];
+      path = path[path.length - 1];
+      if (checkURIEncode(path)) {
+        path = decodeURIComponent(path);
+      }
       return path;
+    }
+
+    function checkURIEncode(uri) {
+      return typeof uri === 'string' && decodeURIComponent(uri) !== uri;
     }
 
   }
