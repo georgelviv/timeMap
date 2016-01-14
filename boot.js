@@ -7,3 +7,9 @@ config.init();
 db.init();
 server.init();
 server.listen();
+
+process.on('SIGINT', onExit);
+
+function onExit () {
+  console.log('Bye bye');
+}

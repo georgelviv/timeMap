@@ -18,7 +18,7 @@ function init() {
   }
   isInited = true;
 
-  server.port = process.argv[2] || nconf.get('port');
+  server.port = nconf.get('port');
   server.app = express();
   server.app.use(express.static(nconf.get('frontPath') + '/'));
 
