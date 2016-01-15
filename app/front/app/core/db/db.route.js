@@ -8,7 +8,7 @@
   function dbRouter($routeProvider) {
     $routeProvider.
       when('/db', {
-        templateUrl: 'db/db.tpl',
+        templateUrl: 'core/db/db.tpl',
         controller: 'dbCtrl as vm',
         title: 'DB tools'
       });
