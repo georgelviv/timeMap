@@ -4,10 +4,13 @@ var concat = require('gulp-concat');
 var path = require('../config').path;
 var vendorArr = [
 	'socket.io-client/socket.io.js',
+	'jquery/dist/jquery.js',
 	'angular/angular.js',
 	'angular-route/angular-route.js',
 	'angular-animate/angular-animate.js',
-	'jquery/dist/jquery.js',
+	'angular-aria/angular-aria.js',
+	'angular-messages/angular-messages.js',
+	'angular-material/angular-material.js',
 	'toastr/toastr.js',
 ];
 var filesArr = buildFilesArr();

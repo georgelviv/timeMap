@@ -4,7 +4,8 @@
   angular
     .module('app.404', [
       'ngRoute',
-      'templates'
+      'templates',
+      'ngMaterial'
     ]);
 
 })();

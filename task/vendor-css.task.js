@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 
 var path = require('../config').path;
 var vendorArr = [
+	'angular-material/angular-material.css',
 	'toastr/toastr.css'
 ];
 var filesArr = buildFilesArr();
