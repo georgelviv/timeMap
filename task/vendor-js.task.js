@@ -8,7 +8,7 @@ var vendorArr = [
 	'angular-route/angular-route.js',
 	'angular-animate/angular-animate.js',
 	'jquery/dist/jquery.js',
-	'toastr/toastr.js'
+	'toastr/toastr.js',
 ];
 var filesArr = buildFilesArr();
 
