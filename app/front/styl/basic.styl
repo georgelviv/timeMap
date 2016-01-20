@@ -11,16 +11,16 @@ button
   &:hover
     cursor pointer
 
-code.highlight {
-  display: block;
-  overflow-wrap: break-word;
-}
-
-code:not(.highlight) {
-  color: #106CC8;
-  margin-left: 1px;
-  margin-right: 1px;
-  -webkit-font-smoothing: auto;
-  padding: 0.125em 0.35em;
-  border-radius: 2px;
-}
+code
+  font-size 1.4rem
+  background rgba(0, 0, 0, 0.065)
+  .highlight
+    display: block;
+    overflow-wrap: break-word;
+  &:not(.highlight)
+    color #106CC8
+    margin-left 1px
+    margin-right 1px
+    -webkit-font-smoothing auto
+    padding 0.125em 0.35em
+    border-radius 2px

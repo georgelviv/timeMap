@@ -18,6 +18,9 @@
       var path = url;
       path = path.split('/');
       path = path[path.length - 1];
+      if (!path) {
+        return '404';
+      }
       if (checkURIEncode(path)) {
         path = decodeURIComponent(path);
       }
