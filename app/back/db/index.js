@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var db = {
   init: init,
-  models: {}
+  models: {},
 };
 
 var user,
@@ -29,5 +29,6 @@ function connectCB (err) {
     console.log('Database not connected: ', errMsg);
     return;
   }
+  db.dbInstance = mongoose.connection.db;
   console.log('Database connected');
 }

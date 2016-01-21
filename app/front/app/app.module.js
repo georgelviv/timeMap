@@ -5,7 +5,7 @@
     .module('app', [
       'app.main',
       'app.404',
-      'app.db',
+      'app.dbtools',
       'app.auth',
       'utils.exceptionHandler',
       'utils.interceptor'

@@ -5,7 +5,7 @@
     .module('utils.interceptor')
     .factory('interceptor', interceptorApi);
 
-  function interceptorApi(loggerApi, $injector) {
+  function interceptorApi($q, loggerApi, $injector) {
       var interceptor = {
         request: request,
         response: response,
@@ -30,10 +30,12 @@
 
       function requestError(error) {
         loggerApi.error('HTTP Request error');
+        return error;
       }
 
       function responseError(error) {
         loggerApi.error('HTTP Response error');
+        return $q.reject(error);
       }
 
       function createRequest(data) {
