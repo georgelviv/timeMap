@@ -5,10 +5,11 @@ Magic starts here.
 
 -----
 
-Projects works with mogngodb. Before you run project, you need to install npm and bower dependencies.
+Projects works with mogngodb. You can change common configs in `config.json` file.
+Before you run project, you need to install npm and bower dependencies.
 Please ensure, you have already installed bower and gulp globally.
 Also to be able to run tests, please install localy phantomjs
-http://phantomjs.org/ . You can change common configs in `config.json` file.
+http://phantomjs.org/ .
 ```
 $ npm install
 $ bower install
