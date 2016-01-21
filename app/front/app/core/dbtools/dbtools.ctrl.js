@@ -5,10 +5,25 @@
     .module('app.dbtools')
     .controller('dbtoolsCtrl', dbtoolsController);
 
-  function dbtoolsController(db, loggerApi) {
+  function dbtoolsController(db, loggerApi, $mdDialog) {
     var vm = this;
 
-    vm.cleanDB = cleanDB;
+    vm.cleanDB = cleanConfirm;
+
+    function cleanConfirm(ev) {
+      var confirmModal = $mdDialog.confirm()
+              .title('Are you sure, you want to clean db?')
+              .textContent('Cleaning of database will delete all stored data.')
+              .ok('Delete')
+              .ariaLabel('Clean DB confirm modal.')
+              .targetEvent(ev)
+              .cancel('Cancel');
+      $mdDialog.show(confirmModal).then(onConfirm);
+
+      function onConfirm() {
+        cleanDB();
+      }
+    }
 
     function cleanDB() {
       db.clean(onSuccess, onError);

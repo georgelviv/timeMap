@@ -3,7 +3,9 @@
 
   angular
     .module('utils.interceptor', [
-      'utils.logger'
+      'utils.logger',
+      'utils.spinner',
+      'utils.uuid'
     ]);
 
 })();

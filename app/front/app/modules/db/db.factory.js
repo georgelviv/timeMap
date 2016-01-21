@@ -31,7 +31,7 @@
         }
       }
 
-      function errorMsg (err) {
+      function errorMsg(err) {
         var msg = '';
         if (angular.isString(err)) {
           return err;

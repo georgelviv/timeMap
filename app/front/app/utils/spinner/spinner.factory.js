@@ -18,11 +18,17 @@
       return service;
 
       function show() {
+        if (isShowed) {
+          return;
+        }
         isShowed = true;
         $rootScope.$emit('utils.spinner:show');
       }
 
       function hide() {
+        if (!isShowed) {
+          return;
+        }
         isShowed = false;
         $rootScope.$emit('utils.spinner:hide');
       }
