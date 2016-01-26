@@ -35,7 +35,7 @@
       }
     }
 
-    function addEvent () {
+    function addEvent() {
       vm.eventsFormShow = !vm.eventsFormShow;
     }
 
