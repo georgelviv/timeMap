@@ -17,13 +17,20 @@ function init () {
   }
 
   isInited = true;
-
-  user = require('./models/user');
-  user.init();
-  mongoose.connect(config.get('db:' + config.get('NODE_ENV') + ':uri'), connectCB);
+  defineModels();
+  mongoose.connect(config.get('db:' + config.get('NODE_ENV') + ':uri'), cbConnect);
 }
 
-function connectCB (err) {
+function defineModels () {
+  var userModel, eventModel;
+  
+  userModel = require('./models/user');
+  userModel.init();
+  eventModel = require('./models/event');
+  eventModel.init();
+}
+
+function cbConnect (err) {
   if (err) {
     var errMsg = err.message || '';
     console.log('Database not connected: ', errMsg);

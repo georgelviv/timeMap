@@ -3,6 +3,7 @@
 
   angular
     .module('app.dbtools', [
+      'ngMessages',
       'app.db'
     ]);
 

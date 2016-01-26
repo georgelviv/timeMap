@@ -1,14 +1,14 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var user = {
+var userApi = {
   init: init
 };
 
 var db,
     isInited = false;
 
-module.exports = user;
+module.exports = userApi;
 
 function init () {
   if (isInited) {
@@ -17,13 +17,13 @@ function init () {
   isInited = true;
 
   defineUserSchema();
-  user.model = mongoose.model('User', user.schema);
+  userApi.model = mongoose.model('User', userApi.schema);
   db = require('./../index');
-  db.models.User = user.model;
+  db.models.User = userApi.model;
 }
 
 function defineUserSchema() {
-  user.schema = new Schema({
+  userApi.schema = new Schema({
       username: {
           type: String,
           unique: true
@@ -31,7 +31,7 @@ function defineUserSchema() {
       age: Number
   });
 
-  user.schema.methods.introducing = introducing;
+  userApi.schema.methods.introducing = introducing;
 
   function introducing() {
       return 'Hi folks, my name is ' + this.username + ', ' + 'I am ' + this.age;

@@ -1,4 +1,5 @@
 var express = require('express'),
+    bodyParser = require('body-parser'),
     nconf = require('nconf');
 
 var server = {
@@ -20,6 +21,8 @@ function init() {
 
   server.port = nconf.get('port');
   server.app = express();
+  server.app.use(bodyParser.urlencoded({ extended: false }));
+  server.app.use(bodyParser.json());
   server.app.use(express.static(nconf.get('frontPath') + '/'));
 
   routes = require('./routes').init();

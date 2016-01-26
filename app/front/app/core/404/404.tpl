@@ -1,4 +1,4 @@
-<section class="404 text-center full-height" layout="column" layout-align="center">
+<section class="not-found text-center full-height" layout="column" layout-align="center">
   <md-content flex="80" layout-padding>
     <h2 class="md-display-3">404 ;(</h2>
     <p class="md-display-1 top-space--md">
