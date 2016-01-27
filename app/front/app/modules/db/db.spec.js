@@ -10,7 +10,7 @@ describe('app.db', function () {
   });
 
   describe('factory', function () {
-    it('should have clean funcion', function () {
+    it('should have clean functions', function () {
       expect(angular.isFunction(dbApi.clean)).toBe(true);
     });
   });

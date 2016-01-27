@@ -10,7 +10,7 @@ describe('utils.uuid', function () {
   });
 
   describe('factory', function () {
-    it('should have get funcion', function () {
+    it('should have get functions', function () {
       expect(angular.isFunction(uuidApi.get)).toBe(true);
     });
   });

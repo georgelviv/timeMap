@@ -10,7 +10,7 @@ describe('app.db.events', function () {
   });
 
   describe('factory', function () {
-    it('should have post, get funcions', function () {
+    it('should have post, get functions', function () {
       expect(angular.isFunction(dbEventsApi.post)).toBe(true);
       expect(angular.isFunction(dbEventsApi.get)).toBe(true);
     });
