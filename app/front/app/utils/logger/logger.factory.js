@@ -9,7 +9,8 @@
       var service = {
         info: info,
         error: error,
-        success: success
+        success: success,
+        warning: warning
       };
 
       toastr.options.timeOut = 10000;
@@ -18,6 +19,10 @@
 
       function success() {
         toastr.success.apply({}, arguments);
+      }
+
+      function warning() {
+        toastr.warning.apply({}, arguments);
       }
 
       function error() {

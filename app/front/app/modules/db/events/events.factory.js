@@ -8,13 +8,22 @@
   function dbEventsApi(EVENT_REST_URI, dbUtils, $http) {
       var dbEvents = {
         get: get,
-        post: post
+        post: post,
+        update: update
       };
 
       return dbEvents;
 
       function get(cbOnSuccess, cbOnError) {
         $http.get(EVENT_REST_URI).then(
+          dbUtils.onSuccess.bind({}, cbOnSuccess),
+          dbUtils.onError.bind({}, 'Error on get events, ', cbOnError)
+        );
+      }
+
+      function update(id, event, cbOnSuccess, cbOnError) {
+        var postURI = EVENT_REST_URI + '?id=' + id;
+        $http.put(postURI, event).then(
           dbUtils.onSuccess.bind({}, cbOnSuccess),
           dbUtils.onError.bind({}, 'Error on get events, ', cbOnError)
         );

@@ -23,12 +23,40 @@ function init() {
   // Events related
   server.app.get('/event', onEventsGet);
   server.app.post('/event', onEventPost);
+  server.app.put('/event', onEventPut);
 
   server.app.get('*', handle404);
 }
 
 function handle404(req, res) {
   res.redirect('/#' + req.url);
+}
+
+function onEventPut(req, res) {
+  if (!req.query.id) {
+    res.status(500).send('Event id is required!');
+    return;
+  }
+  db.models.Event.findById(req.query.id, onFind);
+
+  function onFind(err, event) {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    event.title = req.body.title;
+    event.description = req.body.description;
+    event.save(onSave);
+    
+    function onSave(err) {
+      if (err) {
+        res.status(500).send(err);
+        return;
+      }
+      res.json(req.body);
+    }
+  }
+
 }
 
 function onEventPost(req, res) {

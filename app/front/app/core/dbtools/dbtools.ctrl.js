@@ -14,11 +14,62 @@
     vm.cleanDB = cleanConfirm;
     vm.addEvent = addEvent;
     vm.postEvent = postEvent;
+    vm.editEvent = editEvent;
+    vm.saveEvent = saveEvent;
+    vm.deleteEvent = deleteEvent;
 
     init();
 
     function init() {
       getEvents();
+    }
+
+    function deleteEvent() {
+      loggerApi.warning('Currently working on that');
+    }
+
+    function saveEvent(event, form) {
+      if (!isChanged()) {
+        event.editable = false;
+        return;
+      }
+
+      db.events.update(event._id, event.editData, onSuccess, onError);
+
+      function onSuccess() {
+        loggerApi.success('Event updated');
+        event.title = event.editData.title;
+        event.description = event.editData.description;
+        delete event.editData;
+        form.$setPristine();
+        form.$setUntouched();
+        event.editable = false;
+      }
+
+      function isChanged() {
+        if (event.title !== event.editData.title) {
+          return true;
+        }
+        if (event.description !== event.editData.description) {
+          return true;
+        }
+        return false;
+      }
+    }
+
+    function editEvent(event, isCancel) {
+      if (!event.editData) {
+        event.editData = {
+          title: event.title,
+          description: event.description
+        };
+      }
+      if (isCancel) {
+        event.editable = false;
+      } else {
+        event.editable = true;
+      }
+
     }
 
     function postEvent(form) {
