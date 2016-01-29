@@ -24,8 +24,19 @@
       getEvents();
     }
 
-    function deleteEvent() {
-      loggerApi.warning('Currently working on that');
+    function deleteEvent(event) {
+      db.events.deleteEvent(event._id, onSuccess, onError);
+      function onSuccess() {
+        loggerApi.success('Event deleted');
+        vm.events = vm.events.filter(filterById);
+
+        function filterById(el) {
+          if (el._id === event._id) {
+            return false;
+          }
+          return true;
+        }
+      }
     }
 
     function saveEvent(event, form) {

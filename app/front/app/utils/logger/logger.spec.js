@@ -10,14 +10,11 @@ describe('utils.logger', function () {
   });
 
   describe('factory', function () {
-    it('should have info function', function () {
+    it('should have info, error, success, warning function', function () {
       expect(angular.isFunction(loggerApi.info)).toBe(true);
-    });
-    it('should have error function', function () {
       expect(angular.isFunction(loggerApi.error)).toBe(true);
-    });
-    it('should have success function', function () {
       expect(angular.isFunction(loggerApi.success)).toBe(true);
+      expect(angular.isFunction(loggerApi.warning)).toBe(true);
     });
   });
 

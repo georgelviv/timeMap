@@ -9,7 +9,8 @@
       var dbEvents = {
         get: get,
         post: post,
-        update: update
+        update: update,
+        deleteEvent: deleteEvent
       };
 
       return dbEvents;
@@ -21,11 +22,19 @@
         );
       }
 
+      function deleteEvent(id, cbOnSuccess, cbOnError) {
+        var postURI = EVENT_REST_URI + '?id=' + id;
+        $http.delete(postURI).then(
+          dbUtils.onSuccess.bind({}, cbOnSuccess),
+          dbUtils.onError.bind({}, 'Error on delete event, ', cbOnError)
+        );
+      }
+
       function update(id, event, cbOnSuccess, cbOnError) {
         var postURI = EVENT_REST_URI + '?id=' + id;
         $http.put(postURI, event).then(
           dbUtils.onSuccess.bind({}, cbOnSuccess),
-          dbUtils.onError.bind({}, 'Error on get events, ', cbOnError)
+          dbUtils.onError.bind({}, 'Error on update event, ', cbOnError)
         );
       }
 
