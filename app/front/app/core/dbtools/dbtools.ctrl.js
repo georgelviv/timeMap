@@ -9,7 +9,9 @@
     var vm = this;
 
     vm.eventsFormShow = false;
-    vm.eventsForm = {};
+    vm.eventsForm = {
+      date: new Date()
+    };
 
     vm.cleanDB = cleanConfirm;
     vm.addEvent = addEvent;
@@ -90,7 +92,9 @@
         loggerApi.success('Event posted');
         vm.events = vm.events || [];
         vm.events.push(event);
-        vm.eventsForm = {};
+        vm.eventsForm = {
+          date: new Date()
+        };
         form.$setPristine();
         form.$setUntouched();
         vm.eventsFormShow = false;

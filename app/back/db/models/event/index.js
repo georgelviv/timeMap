@@ -6,6 +6,7 @@ var eventApi = {
 };
 
 var db,
+    factory,
     isInited = false;
 
 module.exports = eventApi;
@@ -20,6 +21,8 @@ function init () {
   eventApi.model = mongoose.model('Event', eventApi.schema);
   db = require('./../../index');
   db.models.Event = eventApi.model;
+  factory = require('./factory');
+  factory.init();
 }
 
 function defineEventSchema() {

@@ -23,74 +23,34 @@ function init() {
 }
 
 function onEventDelete(req, res) {
-  if (!req.query.id) {
-    res.status(500).send('Event id is required!');
-    return;
-  }
-  db.models.Event.findByIdAndRemove(req.query.id, onRemoved);
-  function onRemoved(err) {
-    if (err) {
-      res.status(500).send(err);
-      return;
-    }
-    res.send('removed event:' + req.query.id);
-  }
+  db.event.delete(req.query.id, cb.bind(this, res));
 }
 
 function onEventPut(req, res) {
-  if (!req.query.id) {
-    res.status(500).send('Event id is required!');
-    return;
-  }
-  db.models.Event.findById(req.query.id, onFind);
-
-  function onFind(err, event) {
-    if (err) {
-      res.status(500).send(err);
-      return;
-    }
-    event.title = req.body.title;
-    event.description = req.body.description;
-    event.save(onSave);
-
-    function onSave(err) {
-      if (err) {
-        res.status(500).send(err);
-        return;
-      }
-      res.json(req.body);
-    }
-  }
-
+  var data = {
+    id: req.query.id,
+    title: req.body.title,
+    description: req.body.description
+  };
+  db.event.update(data, cb.bind(this, res));
 }
 
 function onEventPost(req, res) {
-  if (!req.body.title) {
-    res.status(500).send('Events title is required!');
-    return;
-  }
-  var event = db.models.Event(req.body);
-  event.save(onSave);
-
-  function onSave(err) {
-    if (err) {
-      res.status(500).send(err);
-      return;
-    }
-    var eventData = req.body;
-    eventData._id = event._id;
-    res.json(eventData);
-  }
+  var event = {
+    title: req.body.title,
+    description: req.body.description
+  };
+  db.event.add(req.body, cb.bind(this, res));
 }
 
 function onEventsGet(req, res) {
-  db.models.Event.find({}, onFind);
+  db.event.get('', cb.bind(this, res));
+}
 
-  function onFind(err, events) {
-    if (err) {
-      res.status(500).send(err);
-      return;
-    }
-    res.json(events);
+function cb(res, err, data) {
+  if (err) {
+    res.status(500).send(err);
+    return;
   }
+  res.json(data);
 }
