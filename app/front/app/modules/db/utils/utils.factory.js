@@ -38,7 +38,11 @@
           msg += err.status + ': ';
         }
         if (err.data) {
-          msg += err.data + ' ';
+          if (err.data.message) {
+            msg += err.data.message + ' ';
+          } else {
+            msg += err.data + ' ';
+          }
         } else {
           if (err.statusText) {
             msg += err.statusText + ' ';
