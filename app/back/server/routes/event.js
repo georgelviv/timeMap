@@ -30,7 +30,8 @@ function onEventPut(req, res) {
   var data = {
     id: req.query.id,
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
+    date: req.body.date
   };
   db.event.update(data, cb.bind(this, res));
 }
@@ -38,7 +39,8 @@ function onEventPut(req, res) {
 function onEventPost(req, res) {
   var event = {
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
+    date: req.body.date
   };
   db.event.add(req.body, cb.bind(this, res));
 }

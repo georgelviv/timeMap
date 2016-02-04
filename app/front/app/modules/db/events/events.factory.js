@@ -10,7 +10,8 @@
         get: get,
         post: post,
         update: update,
-        deleteEvent: deleteEvent
+        deleteEvent: deleteEvent,
+        isDiffer: isDiffer
       };
 
       return dbEvents;
@@ -20,6 +21,23 @@
           dbUtils.onSuccess.bind({}, cbOnSuccess),
           dbUtils.onError.bind({}, 'Error on get events, ', cbOnError)
         );
+      }
+
+      function isDiffer(eventOne, eventTwo) {
+        var objOne = {};
+        var objTwo = {};
+        if (eventOne.title !== eventTwo.title) {
+          return true;
+        }
+        if (eventOne.description !== eventTwo.description) {
+          return true;
+        }
+        objOne.date = angular.isDate(eventOne.date) ? eventOne.date: (new Date(eventOne.date));
+        objTwo.date = angular.isDate(eventTwo.date) ? eventTwo.date: (new Date(eventTwo.date));
+        if (objOne.date.valueOf() !== objTwo.date.valueOf()) {
+          return true;
+        }
+        return false;
       }
 
       function deleteEvent(id, cbOnSuccess, cbOnError) {

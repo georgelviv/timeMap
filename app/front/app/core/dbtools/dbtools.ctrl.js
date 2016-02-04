@@ -42,7 +42,7 @@
     }
 
     function saveEvent(event, form) {
-      if (!isChanged()) {
+      if (!db.events.isDiffer(event, event.editData)) {
         event.editable = false;
         return;
       }
@@ -53,20 +53,11 @@
         loggerApi.success('Event updated');
         event.title = event.editData.title;
         event.description = event.editData.description;
+        event.date = event.editData.date;
         delete event.editData;
         form.$setPristine();
         form.$setUntouched();
         event.editable = false;
-      }
-
-      function isChanged() {
-        if (event.title !== event.editData.title) {
-          return true;
-        }
-        if (event.description !== event.editData.description) {
-          return true;
-        }
-        return false;
       }
     }
 
@@ -74,7 +65,8 @@
       if (!event.editData) {
         event.editData = {
           title: event.title,
-          description: event.description
+          description: event.description,
+          date: (event.date) ? new Date(event.date) : new Date()
         };
       }
       if (isCancel) {
