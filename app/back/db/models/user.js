@@ -28,6 +28,7 @@ function defineUserSchema() {
           type: String,
           unique: true
       },
+      password: String,
       age: Number
   });
 
@@ -36,4 +37,5 @@ function defineUserSchema() {
   function introducing() {
       return 'Hi folks, my name is ' + this.username + ', ' + 'I am ' + this.age;
   }
+
 }

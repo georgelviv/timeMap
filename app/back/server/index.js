@@ -2,12 +2,14 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     nconf = require('nconf');
 
+
 var server = {
   init: init,
   listen: listen
 };
 
 var routes,
+    security,
     isInited = false;
 
 
@@ -23,8 +25,9 @@ function init() {
   server.app = express();
   server.app.use(bodyParser.urlencoded({ extended: false }));
   server.app.use(bodyParser.json());
-  server.app.use(express.static(nconf.get('frontPath') + '/'));
 
+  server.app.use(express.static(nconf.get('frontPath') + '/'));
+  security = require('./auth').init();
   routes = require('./routes').init();
 }
 
