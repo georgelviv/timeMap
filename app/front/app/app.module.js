@@ -8,7 +8,8 @@
       'app.main',
       'app.404',
       'app.dbtools',
-      'app.auth'
+      'app.auth',
+      'app.map'
     ]);
 
 })();
