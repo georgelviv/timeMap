@@ -34,6 +34,7 @@ function updateEvent(data, cb) {
     }
     event.title = data.title;
     event.description = data.description;
+    event.date = data.date;
     event.save(onSave);
 
     function onSave(err) {
@@ -75,7 +76,11 @@ function getEvent(data, cb) {
 
 function addEvent(data, cb) {
   if (!data.title) {
-    cb('Events title is required!');
+    cb('Event title is required!');
+    return;
+  }
+  if (!data.date) {
+    cb('Event date is required!');
     return;
   }
   var event = db.models.Event(data);

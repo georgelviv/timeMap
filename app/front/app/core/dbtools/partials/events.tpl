@@ -14,6 +14,7 @@
       <md-list-item class="md-3-line" ng-repeat="event in vm.events | orderBy:id:reverse">
         <div class="md-list-item-text" layout="column" ng-hide="event.editable">
           <h3>{{ event.title }}</h3>
+          <h4>{{ event.date | date}}</h4>
           <p>{{ event.description }}</p>
           <div class="md-secondary">
             <md-button class="md-raised md-primary" ng-click="vm.editEvent(event)">Edit</md-button>
