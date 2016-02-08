@@ -28,6 +28,7 @@ function init () {
 function defineEventSchema() {
   eventApi.schema = new Schema({
       title: String,
-      description: String
+      description: String,
+      date: Date
   });
 }

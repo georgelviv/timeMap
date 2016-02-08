@@ -16,6 +16,9 @@ describe('app.db.events', function () {
       expect(angular.isFunction(dbEventsApi.update)).toBe(true);
       expect(angular.isFunction(dbEventsApi.deleteEvent)).toBe(true);
     });
+    it('should have isDiffer functions', function () {
+      expect(angular.isFunction(dbEventsApi.isDiffer)).toBe(true);
+    });
   });
 
 });

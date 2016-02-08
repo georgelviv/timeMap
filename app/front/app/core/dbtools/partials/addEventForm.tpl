@@ -24,7 +24,7 @@
           </md-input-container>
         </div>
         <div flex="25" class="inner-left-space">
-          <label>
+          <label class="date-picker-label">
             Date of event
             <md-datepicker name="date" ng-model="vm.eventsForm.date" md-placeholder="Enter date" required ng-required="true">
             </md-datepicker>
