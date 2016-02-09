@@ -9,7 +9,7 @@ var server = {
 };
 
 var routes,
-    security,
+    auth,
     isInited = false;
 
 
@@ -27,7 +27,7 @@ function init() {
   server.app.use(bodyParser.json());
 
   server.app.use(express.static(nconf.get('frontPath') + '/'));
-  security = require('./auth').init();
+  auth = require('./auth').init();
   routes = require('./routes').init();
 }
 

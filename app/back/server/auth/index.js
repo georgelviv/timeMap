@@ -4,13 +4,13 @@ var server = require('../index'),
     passport = require('passport'),
     localStrategy = require('passport-local' ).Strategy;
 
-var security = {
+var auth = {
   init: init
 };
 
 var isInited = false;
 
-module.exports = security;
+module.exports = auth;
 
 function init() {
   if (isInited) {
@@ -32,6 +32,8 @@ function init() {
   server.app.post('/login', onLogin);
   server.app.post('/users', createUser);
   server.app.get('/users', getUsers);
+  server.app.get('/users/:id' , getUserById);
+  server.app.delete('/users/:id' , deleteUserById);
   
 
   // define default 'local' strategy, used for login
@@ -50,29 +52,52 @@ function getUsers(req, res){
   })
 }
 
+function deleteUserById(req, res){
+  var id = req.params.id;
+  db.models.User.remove({ _id: id }, function (err) {
+      if(err) {
+          res.send(err);
+      } else {
+          console.log('Deleting user: ' + id);
+          res.send('Success');
+      }
+  });
+}
+
+function getUserById(req, res){
+  var id = req.params.id;
+  console.log('User has id: ' + id);
+  db.models.User.find({ _id: id }, function (err, user) {
+      if(err) {
+          res.send(err);
+      } else {
+          res.send(user);
+      }
+  });
+}
+
 function onLogin(req, res) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
-      return res.json(500, {
+      return res.status(500).json({
         err:err,
         sessionId: req.session.id
       });
     }
     if (!user) {
-      return res.json( 401,
-        {
+      return res.status(401).json({
         err: info,
         sessionId: req.session.id
         });
     }
     req.login(user,  function(err) {
       if (err) {
-        return res.json(500, {
+        return res.status(500).json({
           err: 'Could not login user',
           sessionId: req.session.id
         });
       }
-      res.json(200, {
+      res.status(200).json({
         user: user,
         sessionId: req.session.id
       });
@@ -84,14 +109,13 @@ function onLogin(req, res) {
 function createUser(req, res) {
   passport.authenticate('signup', function(err, user, info) {
     if (err) {
-      return res.json(500, {
+      return res.status(500).json({
         err:err,
         sessionId: req.session.id
       });
     }
     if (!user) {
-      return res.json( 400,
-        {
+      return res.status(400).json({
         err: info,
         sessionId: req.session.id
         });
@@ -103,7 +127,7 @@ function createUser(req, res) {
           sessionId: req.session.id
         });
       }
-      res.json(201, {
+      res.status(201).json({
         user: user,
         sessionId: req.session.id
       });
@@ -123,12 +147,12 @@ function loginCallback(username, password, authCheckDone) {
     }
 // the 'verify' function for 'signup' strategy
 function signupCallback (req, password, username, authCheckDone) {
-  db.models.User.findOne({username: req.param('username')}, function(err, user) {
+  db.models.User.findOne({username: req.params.username}, function(err, user) {
     if (err) return authCheckDone(err);
     if (user) {
       return authCheckDone(null,
         false,
-        'User ' + req.param('username') + ' already exists.');
+        'User ' + req.params.username + ' already exists.');
     }
     // it's safe, now create the user account
     var user = {
