@@ -6,7 +6,10 @@
       'ngRoute',
       'templates',
       'utils.logger',
-      'utils.spinner'
+      'utils.spinner',
+      'app.timeline',
+      'app.sidebar',
+      'app.events'
     ]);
 
 })();
