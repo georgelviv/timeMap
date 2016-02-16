@@ -3,14 +3,29 @@
 
   angular
     .module('app.sidebar')
-    .directive('sidebar', timelineDirective);
+    .directive('sidebar', sidebarDirective);
 
-  function timelineDirective() {
+  function sidebarDirective() {
     var directive = {
-      template: 'Sidebar should be here'
+      controller: sidebarCtrl,
+      controllerAs: 'vm',
+      templateUrl: 'directives/sidebar/sidebar.tpl',
+      restrict: 'E'
     };
 
     return directive;
+  }
+
+  function sidebarCtrl() {
+    var vm = this;
+
+    vm.addEvent = addEvent;
+    vm.isAddEvent = false;
+    addEvent();
+
+    function addEvent() {
+      vm.isAddEvent = !vm.isAddEvent;
+    }
   }
 
 })();
