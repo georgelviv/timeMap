@@ -7,7 +7,8 @@
 
   function timelineDirective() {
     var directive = {
-      template: 'Timeline should be here'
+      templateUrl: 'directives/timeline/timeline.tpl',
+      restrict: 'E'
     };
 
     return directive;

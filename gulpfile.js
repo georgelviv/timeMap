@@ -1,6 +1,9 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
+var nconf = require('nconf');
+
+nconf.env().argv();
 
 gulp.task('prod', function () {
   runSequence('build', 'delay',

@@ -2,6 +2,8 @@
   'use strict';
 
   angular
-    .module('app.sidebar', []);
+    .module('app.sidebar', [
+      'app.event'
+    ]);
 
 })();

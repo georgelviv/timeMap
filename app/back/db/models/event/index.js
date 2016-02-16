@@ -32,6 +32,9 @@ function defineEventSchema() {
       date: Date,
       author: Number,
       tags: Array,
-      coordinates: String 
+      coordinates: {
+        longitude: String,
+        latitude: String
+      }
   });
 }
