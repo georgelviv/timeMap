@@ -83,6 +83,14 @@ function addEvent(data, cb) {
     cb('Event date is required!');
     return;
   }
+  if (!data.coordinates.latitude) {
+    cb('Event latitude is required!');
+    return;
+  }
+  if (!data.coordinates.longitude) {
+    cb('Event longitude is required!');
+    return;
+  }
   var event = db.models.Event(data);
   event.save(onSave);
 

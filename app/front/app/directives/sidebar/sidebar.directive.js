@@ -21,7 +21,6 @@
 
     vm.addEvent = addEvent;
     vm.isAddEvent = false;
-    addEvent();
 
     function addEvent() {
       vm.isAddEvent = !vm.isAddEvent;
