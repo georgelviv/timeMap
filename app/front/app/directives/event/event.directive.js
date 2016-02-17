@@ -12,39 +12,58 @@
       templateUrl: 'directives/event/event.tpl',
       restrict: 'E',
       scope: {
-          isNew: '@'
+        isNew: '@'
       }
     };
 
     return directive;
 
-    function eventCtrl($scope) {
+    function eventCtrl($scope, loggerApi, dbEvents) {
       var vm = this;
 
       init();
 
       function init() {
         vm.isNew = $scope.isNew || false;
+        vm.submitEvent = submitEvent;
+
         if (vm.isNew) {
-          onEventNew();
+          setEditDefault();
+          vm.currentState = 'edit';
         } else {
           vm.currentState = 'preview';
         }
       }
 
-      function onEventNew() {
-        vm.event = {
-          form: {},
-          edit: {
-            date: new Date(),
-            coordinates: {
-              latitude: '48.379433',
-              longitude: '31.165580'
-            }
+      function setEditDefault() {
+        vm.editEvent = {
+          date: new Date(),
+          coordinates: {
+            latitude: '48.379433',
+            longitude: '31.165580'
           },
+          author: 0,
+          tags: [],
+          description: '',
+          title: ''
         };
-        vm.currentState = 'edit';
       }
+
+      function resetForm() {
+        vm.form.$setPristine();
+        vm.form.$setUntouched();
+      }
+
+      function submitEvent() {
+        dbEvents.post(vm.editEvent, onSuccessPost);
+
+        function onSuccessPost() {
+          loggerApi.success('Event posted');
+          setEditDefault();
+          resetForm();
+        }
+      }
+
     }
   }
 
