@@ -7,11 +7,11 @@
 	          <form layout="column" name="userForm" layout-align="center center" layout-fill>
 							<md-input-container>
 								<label>Username</label>
-								<input ng-model="user.username" required>
+								<input ng-model="vm.login.username" required>
 							</md-input-container>
 							<md-input-container>
 								<label>Password</label>
-								<input ng-model="user.password" type="password" required>
+								<input ng-model="vm.login.password" type="password" required>
 							</md-input-container>
 							<md-input-container layout-align="center center">
 								<div layout="row" layout-sm="column" layout-margin>
@@ -23,14 +23,30 @@
 	      </md-tab>
 	      <md-tab label="Sing up">
 	        <md-content class="md-padding">
-	          <form layout="column" name="userForm" layout-align="center center" layout-fill>
+	          <form layout="column" name="vm.registrationForm" layout-align="center center" layout-fill>
 							<md-input-container>
 								<label>Username</label>
-								<input ng-model="user.username" required>
+								<input name="username" ng-model="vm.registration.username" minlength="3" required>
+								<div ng-messages="vm.registrationForm.username.$error">
+				          <div ng-message="required">Username is required.</div>
+				          <div ng-message="minlength">Minimum 3 characters is required.</div>
+				        </div>
 							</md-input-container>
 							<md-input-container>
 								<label>Password</label>
-								<input ng-model="user.password" type="password" required>
+								<input name="password" ng-model="vm.registration.password" type="password" required>
+									<div ng-messages="vm.registrationForm.password.$error">
+				          <div ng-message="required">Password is required.</div>
+				          
+				        </div>
+							</md-input-container>
+							<md-input-container>
+								<label>Email</label>
+								<input name="email" ng-model="email" type="email" required>
+							</md-input-container>
+							<md-input-container>
+								<label>Confirm Password</label>
+								<input ng-model="user.confirmPassword" type="password" required>
 							</md-input-container>
 							<md-input-container layout-align="center center">
 								<div layout="row" layout-sm="column" layout-margin>
