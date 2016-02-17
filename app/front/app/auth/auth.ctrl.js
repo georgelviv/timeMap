@@ -3,12 +3,13 @@
 
   angular
     .module('app.auth')
-    .controller('AuthCtrl', AuthController);
-
-  function AuthController(loggerApi, $http){
+    .controller('registrController', registrController);
+  
+  function registrController(loggerApi, $http){
     var vm = this;
     vm.createUser = createUser;
     vm.loginUser = loginUser;
+    vm.passportValidation = passportValidation;
     
     activate();
 
@@ -16,8 +17,8 @@
       vm.method = 'POST';
       vm.url = '/users';
       vm.user = {
-        username: vm.login.username,
-        password: vm.login.password
+        username: vm.registration.username,
+        password: vm.registration.password
       };
       $http({method: vm.method, url: vm.url, data: vm.user}).
         then(function successCallback(response) {
@@ -47,7 +48,8 @@
     }
 
     function passportValidation(){
-      if(vm.registration.password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$/)){
+      console.log('passportValidation');
+      if(vm.registration.password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/)){
         return true;
       }  else {
         return false;

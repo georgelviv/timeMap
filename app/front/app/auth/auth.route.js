@@ -9,8 +9,8 @@
     $routeProvider.
       when('/login', {
         templateUrl: 'auth/auth.tpl',
-        controller: 'AuthCtrl as vm',
-        title: 'Login'
+        controller: 'registrController as vm',
+        title: 'Registration'
       });
   }
 
