@@ -52,7 +52,7 @@
 
       <div class="event__edit-form__submit-wrapper">
         <md-button class="md-raised" ng-click="">Cancel</md-button>
-        <md-button class="md-raised  md-primary" type="submit">
+        <md-button class="md-raised md-primary" type="submit">
           <span ng-show="vm.isNew">Save</span>
           <span ng-hide="vm.isNew">Update</span>
         </md-button>
