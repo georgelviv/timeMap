@@ -11,24 +11,24 @@
       replace: true,
       templateUrl: 'directives/map/map.tpl',
       link: init
-    }
+    };
     return mapDirective;
 
-    function init (scope, element, attrs){
+    function init(scope, element, attrs) {
+      var mapBlock = document.getElementById(attrs.id);
+      var map = new google.maps.Map(mapBlock, getMapOptions());
 
-      var map = new google.maps.Map(document.getElementById(attrs.id), getMapOptions());
-
-      function getMapOptions(){
+      function getMapOptions() {
         return {
           zoom: 6,
           center: new google.maps.LatLng(48.379433, 31.16558),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
       }
-      function createMarker (pos) {
+      function createMarker(pos) {
         var myLatlng = new google.maps.LatLng(pos.lat,pos.lng);
         var marker = new google.maps.Marker({
-          position: myLatlng, 
+          position: myLatlng,
           map: map,
           title: pos.title
         });
