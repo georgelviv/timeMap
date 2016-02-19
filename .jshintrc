@@ -66,6 +66,7 @@
         "inject": false,
         "console": false,
         "afterEach": false,
-        "crypto": false
+        "crypto": false,
+        "google": false
     }
 }

@@ -12,4 +12,5 @@ process.on('SIGINT', onExit);
 
 function onExit () {
   console.log('Bye bye');
+  process.exit();
 }

@@ -29,6 +29,12 @@ function defineEventSchema() {
   eventApi.schema = new Schema({
       title: String,
       description: String,
-      date: Date
+      date: Date,
+      author: Number,
+      tags: Array,
+      coordinates: {
+        longitude: String,
+        latitude: String
+      }
   });
 }
