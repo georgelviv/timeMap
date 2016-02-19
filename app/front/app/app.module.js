@@ -7,8 +7,7 @@
       'utils.interceptor',
       'app.main',
       'app.404',
-      'app.dbtools',
-      'app.auth'
+      'app.dbtools'
     ]);
 
 })();

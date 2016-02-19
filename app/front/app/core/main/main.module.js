@@ -6,7 +6,8 @@
       'ngRoute',
       'templates',
       'utils.logger',
-      'utils.spinner'
+      'utils.spinner',
+      'app.auth'
     ]);
 
 })();
