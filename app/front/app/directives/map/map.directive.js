@@ -9,7 +9,7 @@
     var mapDirective = {
       restrict: 'E',
       replace: true,
-      template: '<div></div>',
+      templateUrl: 'directives/map/map.tpl',
       link: init
     }
     return mapDirective;
