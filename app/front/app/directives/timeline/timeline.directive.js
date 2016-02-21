@@ -3,11 +3,12 @@
 
   angular
     .module('app.timeline')
-    .directive('timeline', timelineDirective);
+    .directive('timeLine', timelineDirective);
 
   function timelineDirective() {
     var directive = {
       templateUrl: 'directives/timeline/timeline.tpl',
+      replace: true,
       restrict: 'E'
     };
 
