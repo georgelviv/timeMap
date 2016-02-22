@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-concat": "^2.6.0",
@@ -30,7 +31,6 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-spec-reporter": "0.0.22",
     "phantomjs": "^1.9.19",
-    "rimraf": "^2.4.3",
     "run-sequence": "^1.1.4"
   },
   "dependencies": {

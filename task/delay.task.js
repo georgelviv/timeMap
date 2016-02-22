@@ -1,4 +1,4 @@
-var delalMs = 1000;
+var delalMs = 1500;
 
 module.exports = delayTask;
 

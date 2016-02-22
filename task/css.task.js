@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var stylus = require('gulp-stylus');
+var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCss = require('gulp-minify-css');
 var livereload = require('gulp-livereload');
@@ -27,5 +28,6 @@ function cssTask () {
 function cssTaskProd () {
   gulp.src(buildFile)
     .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(concat('main.css'))
     .pipe(gulp.dest(path.prodDir));
 }

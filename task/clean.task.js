@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var rimraf = require('rimraf');
+var del = require('del');
 var path = require('../config').path;
 
 var sourcePath = [
@@ -11,6 +11,11 @@ var sourcePath = [
 module.exports = cleanTask;
 
 function cleanTask () {
-    return gulp.src(sourcePath, {read: false})
-          .pipe(rimraf());
+    return del(sourcePath, cb);
+
+    function cb(error) {
+      if (error) {
+        console.error('Error with cleanTask', error);
+      }
+    }
 }
