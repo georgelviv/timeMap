@@ -27,7 +27,7 @@ module.exports.prod = jsTaskProd;
 module.exports.srcFiles = srcFiles;
 
 function jsTask () {
-  gulp.src(srcFiles)
+  return gulp.src(srcFiles)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'))
@@ -58,7 +58,7 @@ function jsTask () {
 }
 
 function jsTaskProd () {
-  gulp.src(buildFile)
+  return gulp.src(buildFile)
     .pipe(uglify())
     .pipe(concat('script.js'))
     .pipe(gulp.dest(path.prodDir));

@@ -12,6 +12,6 @@ var srcFiles = [
 module.exports = testCopyTask;
 
 function testCopyTask () {
-  gulp.src(srcFiles)
+  return gulp.src(srcFiles)
     .pipe(gulp.dest(path.testDir + '/build/src'));
 }

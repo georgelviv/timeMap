@@ -10,12 +10,14 @@ var sourcePath = [
 
 module.exports = cleanTask;
 
-function cleanTask () {
+function cleanTask (callback) {
     return del(sourcePath, cb);
 
     function cb(error) {
       if (error) {
         console.error('Error with cleanTask', error);
+        return;
       }
+      callback();
     }
 }

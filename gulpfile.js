@@ -6,30 +6,33 @@ var nconf = require('nconf');
 nconf.env().argv();
 
 gulp.task('prod', function () {
-  runSequence('build', 'delay',
-              ['css-prod', 'js-prod'], 'delay',
+  return runSequence('clean', ['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+              'inject', ['css-prod', 'js-prod'], 'delay',
               'inject-prod');
 });
 
 gulp.task('build', function () {
-    runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
                 'inject');
 });
 
 gulp.task('develop', function () {
-    runSequence('build', 'test-run', 'watch');
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+                'inject', 'delay', 'test-concat', 'delay', 'test-karma', 'watch');
 });
 
 gulp.task('build-test', function () {
-    runSequence('build', 'test-run');
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+                'inject', 'delay', 'test-concat', 'delay', 'test-karma');
 });
 
 gulp.task('test-run', function () {
-    runSequence('delay', 'test-concat', 'delay', 'test-karma');
+    return runSequence('delay', 'test-concat', 'delay', 'test-karma');
 });
 
 gulp.task('test', function () {
-    runSequence('build', 'test-copy', 'delay', 'test-report');
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+                'inject', 'test-copy', 'delay', 'test-report');
 });
 
 gulp.task('default', require('./task/default.task'));

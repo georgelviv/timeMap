@@ -15,7 +15,7 @@ module.exports = testConcatTask;
 module.exports.srcFiles = path.frontDir + '/app/**/*.spec.js';
 
 function testConcatTask () {
-  gulp.src(srcFiles)
+  return gulp.src(srcFiles)
     .pipe(concat('spec.js'))
     .pipe(gulp.dest(path.testDir + '/build/src'));
 }

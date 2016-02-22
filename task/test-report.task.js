@@ -20,7 +20,7 @@ module.exports = testTask;
 module.exports.srcFiles = srcFile;
 
 function testTask () {
-  gulp.src(srcFile)
+  return gulp.src(srcFile)
     .pipe(gulpInject(gulp.src(srcFiles, {read: false}), {
       ignorePath: 'test/build',
       addRootSlash: false
