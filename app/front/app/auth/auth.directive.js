@@ -14,11 +14,12 @@
     };
 
     return directive;
+
     function authController(loggerApi, $http){
       var vm = this;
       vm.createUser = createUser;
       vm.loginUser = loginUser;
-      vm.passportValidation = passportValidation;
+      vm.passportMatch = passportMatch;
       
       init();
 
@@ -27,7 +28,8 @@
         vm.url = '/users';
         vm.user = {
           username: vm.registration.username,
-          password: vm.registration.password
+          password: vm.registration.password,
+          email: vm.registration.email
         };
         $http({method: vm.method, url: vm.url, data: vm.user}).
           then(function successCallback(response) {
@@ -57,12 +59,10 @@
         vm.currentState = 'login';
       }
 
-      function passportValidation(){
-        console.log('passportValidation');
-        if(vm.registration.password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/)){
-          return true;
-        }  else {
-          return false;
+      function passportMatch(){
+        console.log('passportMatch');
+        if(vm.registration){
+          return vm.registration.password == vm.registration.confirmPassword
         }
       }
     }
