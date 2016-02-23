@@ -7,7 +7,7 @@
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="vm.closeSideBar()">
           <md-tooltip>Close Side Panel</md-tooltip>
-          <md-icon class="md-default-theme" class="material-icons">X</md-icon>
+          <md-icon class="material-icons md-light md-48"> close </md-icon>
         </md-button>
       </div>
     </md-toolbar>

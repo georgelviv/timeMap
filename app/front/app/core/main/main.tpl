@@ -3,7 +3,7 @@
     <md-toolbar>
       <div class="md-toolbar-tools">
         <div flex="20" layout="row">
-          <md-button ng-href="/" class="logo"></md-button>
+          <md-button ng-href="/#/" class="logo"></md-button>
         </div>
         <div flex="60" layout="row"  layout-align="center center">
           <div>
@@ -35,13 +35,10 @@
   <footer>
     <md-toolbar layout="row" layout="row">
       <div class="md-toolbar-tools">
-      <div flex="20">
-        <md-button ng-href="http://www.epam-group.ru/careers/ukraine" class="epam_logo"></md-button>
-      </div>
-      <div flex="60" layout="row"  layout-align="center center">
-        <div>TIME MAP version 0.0</div>
-      </div>
+        <div flex="100" layout="row"  layout-align="center center">
+          <div>TIME MAP version 0.0</div>
         </div>
+      </div>
     </md-toolbar>
   </footer>
 </section>
