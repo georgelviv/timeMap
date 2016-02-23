@@ -3,7 +3,7 @@
     <md-toolbar>
       <div class="md-toolbar-tools">
         <div flex="20" layout="row">
-          <md-button ng-href="/#/" class="logo"></md-button>
+          <md-button ng-href="/#/" aria-label="logo" class="logo"></md-button>
         </div>
         <div flex="60" layout="row"  layout-align="center center">
           <div>
