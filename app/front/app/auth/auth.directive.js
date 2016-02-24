@@ -20,6 +20,7 @@
       vm.createUser = createUser;
       vm.loginUser = loginUser;
       vm.passportMatch = passportMatch;
+      vm.resetForm = resetForm;
       
       init();
 
@@ -31,8 +32,10 @@
           password: vm.registration.password,
           email: vm.registration.email
         };
+        console.log('user',vm.user);
         $http({method: vm.method, url: vm.url, data: vm.user}).
           then(function successCallback(response) {
+            resetForm(vm.registration);
             loggerApi.success('User successfully registered');
           }, function errorCallback(response){
             loggerApi.error('Registration failed');
@@ -46,8 +49,10 @@
           username: vm.login.username,
           password: vm.login.password
         };
+
         $http({method: vm.method, url: vm.url, data: vm.user}).
           then(function successCallback(response) {
+            resetForm(vm.login);
             loggerApi.success('Login succeeded');
           }, function errorCallback(response){
             loggerApi.error('Login failed');
@@ -60,10 +65,14 @@
       }
 
       function passportMatch(){
-        console.log('passportMatch');
         if(vm.registration){
-          return vm.registration.password == vm.registration.confirmPassword
+          return  vm.registration.password == vm.registration.confirmPassword
         }
+      }
+
+      function resetForm(form) {
+        form.$setPristine();
+        form.$setUntouched();
       }
     }
   }

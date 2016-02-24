@@ -107,6 +107,14 @@ function onLogin(req, res) {
 }
 
 function createUser(req, res) {
+  var errors = formValidation(req, res);
+  if (errors) {
+    res.status(400).json({
+          err: errors.map(function(err){return err.msg}).join("; "),
+          sessionId: req.session.id
+        });
+    return;
+  }
   passport.authenticate('signup', function(err, user, info) {
     if (err) {
       return res.status(500).json({
@@ -146,19 +154,17 @@ function loginCallback(username, password, authCheckDone) {
       });
     }
 // the 'verify' function for 'signup' strategy
-function signupCallback (req, password, username, authCheckDone) {
-  db.models.User.findOne({username: req.params.username}, function(err, user) {
+function signupCallback (req, username, password, authCheckDone) {
+  db.models.User.findOne({username: username}, function(err, user) {
     if (err) return authCheckDone(err);
     if (user) {
       return authCheckDone(null,
         false,
-        'User ' + req.params.username + ' already exists.');
+        'User ' + username + ' already exists.');
     }
     // it's safe, now create the user account
-    var user = {
-      username: req.param('username' ) || 'johndoe',
-      password: req.param('password') || 'always42',
-    };
+    var user = req.body;
+    console.log('uswer', req.body);
     new db.models.User(user).save( function(err, user) {
       if (err) return authCheckDone(err);
       if (!user) return authCheckDone('Failed on create user :(');
@@ -167,7 +173,13 @@ function signupCallback (req, password, username, authCheckDone) {
 
   });
 }
+function formValidation(req, res){
+  req.checkBody('username', 'Username can not be empty').notEmpty();
+  req.assert('password', 'Mininum 8 characters required').len(8);
+  req.checkBody("email", "Enter a valid email address").isEmail();
+  return req.validationErrors();
 
+}
 function deserializeUser(id, done) {
     db.models.User.findById(id, function (err, user) {
       done(err, user);

@@ -1,5 +1,5 @@
 <md-content class="md-padding">
-  <form layout="column" name="userForm" layout-align="center center" layout-fill>
+  <form name="vm.login" layout="column" name="userForm" layout-align="center center" layout-fill>
     <md-input-container>
       <label>Username</label>
       <input ng-model="vm.login.username" required>

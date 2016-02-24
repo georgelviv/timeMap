@@ -1,5 +1,6 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
+    validator = require('express-validator'),
     nconf = require('nconf');
 
 
@@ -25,6 +26,7 @@ function init() {
   server.app = express();
   server.app.use(bodyParser.urlencoded({ extended: false }));
   server.app.use(bodyParser.json());
+  server.app.use(validator()); 
 
   server.app.use(express.static(nconf.get('frontPath') + '/'));
   auth = require('./auth').init();
