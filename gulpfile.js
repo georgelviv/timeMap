@@ -16,18 +16,14 @@ gulp.task('build', function () {
                 'inject');
 });
 
+gulp.task('build-test', function () {
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+                'inject', 'delay', 'test-concat', 'delay', 'test-karma', 'coveralls');
+});
+
 gulp.task('develop', function () {
     return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
                 'inject', 'delay', 'test-concat', 'delay', 'test-karma', 'watch');
-});
-
-gulp.task('build-test', function () {
-    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
-                'inject', 'delay', 'test-concat', 'delay', 'test-karma');
-});
-
-gulp.task('test-run', function () {
-    return runSequence('delay', 'test-concat', 'delay', 'test-karma');
 });
 
 gulp.task('test', function () {
@@ -48,6 +44,7 @@ gulp.task('template', require('./task/template.task'));
 gulp.task('inject', require('./task/inject.task'));
 gulp.task('inject-prod', require('./task/inject.task').prod);
 gulp.task('delay', require('./task/delay.task'));
+gulp.task('coveralls', require('./task/coverallsTask.task'));
 gulp.task('test-copy', require('./task/test-copy.task'));
 gulp.task('test-concat', require('./task/test-concat.task'));
 gulp.task('test-karma', require('./task/test-karma.task'));

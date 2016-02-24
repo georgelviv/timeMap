@@ -3,7 +3,7 @@
 var path = require('./config').path;
 
 module.exports = function(config) {
-  config.set({
+  var configObj = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -38,7 +38,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec'],
+    reporters: ['spec', 'coverage'],
 
 
     // web server port
@@ -69,6 +69,17 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultanous
-    concurrency: Infinity
-  });
+    concurrency: Infinity,
+    coverageReporter: {
+      dir: path.testDir + '/coverage/',
+      reporters: [
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcov', subdir: path.coverageLcovSuffixDir }
+      ]
+    }
+  };
+
+  configObj.preprocessors[path.buildDir + '/app.js'] = ['coverage'];
+
+  config.set(configObj);
 };
