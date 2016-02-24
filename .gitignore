@@ -1,6 +1,6 @@
 node_modules/
 test/build
-test/coverage/report-html
+test/coverage/
 app/front/vendor/
 build/
 prod/
