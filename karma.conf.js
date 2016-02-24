@@ -74,7 +74,8 @@ module.exports = function(config) {
       dir: path.testDir + '/coverage/',
       reporters: [
         { type: 'html', subdir: 'report-html' },
-        { type: 'lcov', subdir: path.coverageLcovSuffixDir }
+        { type: 'lcov', subdir: path.coverageLcovSuffixDir },
+        { type: 'text' }
       ]
     }
   };
