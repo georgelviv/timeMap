@@ -44,7 +44,7 @@ gulp.task('template', require('./task/template.task'));
 gulp.task('inject', require('./task/inject.task'));
 gulp.task('inject-prod', require('./task/inject.task').prod);
 gulp.task('delay', require('./task/delay.task'));
-gulp.task('coveralls', require('./task/coverallsTask.task'));
+gulp.task('coveralls', require('./task/coveralls.task'));
 gulp.task('test-copy', require('./task/test-copy.task'));
 gulp.task('test-concat', require('./task/test-concat.task'));
 gulp.task('test-karma', require('./task/test-karma.task'));
