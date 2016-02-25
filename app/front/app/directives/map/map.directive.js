@@ -5,7 +5,7 @@
     .module('app.map')
     .directive('map', initMap);
 
-  function initMap() {
+  function initMap(mapApi, dbEvents) {
     var mapDirective = {
       restrict: 'E',
       replace: true,
@@ -25,28 +25,31 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
       }
-      function createMarker(pos) {
-        var myLatlng = new google.maps.LatLng(pos.lat,pos.lng);
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: pos.title
-        });
-      }
 
       google.maps.event.addListener(map, 'click', function(e) {
-        scope.$apply(function() {
-          createMarker({
-            lat: e.latLng.lat(),
-            lng: e.latLng.lng(),
-            title: 'event'
-          });
-
-          console.log(e.latLng.lat());
-          console.log(e.latLng.lng());
-        });
-
+        console.log(e.latLng.lat());
+        console.log(e.latLng.lng());
+        mapApi.createMarker({
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
+          title: 'event'
+        }, map);
       });
+
+
+      mapApi.getEvents(showData);
+
+      function showData(data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+          mapApi.createMarker({
+            lat: data[i].coordinates.latitude,
+            lng: data[i].coordinates.longitude,
+            title: data[i].title
+          }, map);
+        }
+      }
+
     }
   }
 })();
