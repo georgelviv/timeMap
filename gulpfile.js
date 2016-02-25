@@ -6,7 +6,7 @@ var nconf = require('nconf');
 nconf.env().argv();
 
 gulp.task('prod', function () {
-  return runSequence('clean', ['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+  return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
               'inject', ['css-prod', 'js-prod'], 'delay',
               'inject-prod');
 });
@@ -18,17 +18,17 @@ gulp.task('build', function () {
 
 gulp.task('build-test', function () {
     return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
-                'inject', 'delay', 'test-concat', 'delay', 'test-karma', 'coveralls');
+                'inject', 'delay', 'delay', 'test-karma', 'coveralls');
 });
 
 gulp.task('develop', function () {
     return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
-                'inject', 'delay', 'test-concat', 'delay', 'test-karma', 'watch');
+                'inject', 'delay', 'test-karma', 'delay', 'watch');
 });
 
 gulp.task('test', function () {
     return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
-                'inject', 'test-copy', 'delay', 'test-report');
+                'inject', 'test-karma-html', 'open-test');
 });
 
 gulp.task('default', require('./task/default.task'));
@@ -45,8 +45,7 @@ gulp.task('inject', require('./task/inject.task'));
 gulp.task('inject-prod', require('./task/inject.task').prod);
 gulp.task('delay', require('./task/delay.task'));
 gulp.task('coveralls', require('./task/coveralls.task'));
-gulp.task('test-copy', require('./task/test-copy.task'));
-gulp.task('test-concat', require('./task/test-concat.task'));
 gulp.task('test-karma', require('./task/test-karma.task'));
-gulp.task('test-report', require('./task/test-report.task'));
+gulp.task('test-karma-html', require('./task/test-karma.task').htmlReport);
 gulp.task('watch', require('./task/watch.task'));
+gulp.task('open-test', require('./task/open-browser.task'));

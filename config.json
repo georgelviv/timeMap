@@ -6,6 +6,7 @@
     "prodDir": "prod",
     "bowerDir": "app/front/vendor",
     "testDir": "test",
+    "testSpecSuffixDir": "spec",
     "coverageDir": "test/coverage",
     "coverageLcovSuffixDir": "report-lcov"
   },

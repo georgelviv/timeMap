@@ -6,7 +6,8 @@ var sourcePath = [
   path.buildDir,
   path.prodDir,
   path.testDir + '/build',
-  path.testDir + '/coverage'
+  path.testDir + '/' + path.testSpecSuffixDir,
+  path.coverageDir
 ];
 
 module.exports = cleanTask;
