@@ -1,32 +1,34 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
+var nconf = require('nconf');
+
+nconf.env().argv();
 
 gulp.task('prod', function () {
-  runSequence('build', 'delay',
-              ['css-prod', 'js-prod'], 'delay',
+  return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+              'inject', ['css-prod', 'js-prod'], 'delay',
               'inject-prod');
 });
 
 gulp.task('build', function () {
-    runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
                 'inject');
 });
 
-gulp.task('develop', function () {
-    runSequence('build', 'test-run', 'watch');
-});
-
 gulp.task('build-test', function () {
-    runSequence('build', 'test-run');
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+                'inject', 'delay', 'delay', 'test-karma', 'coveralls');
 });
 
-gulp.task('test-run', function () {
-    runSequence('delay', 'test-concat', 'delay', 'test-karma');
+gulp.task('develop', function () {
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+                'inject', 'delay', 'test-karma', 'delay', 'watch');
 });
 
 gulp.task('test', function () {
-    runSequence('build', 'test-copy', 'delay', 'test-report');
+    return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
+                'inject', 'test-karma-html', 'open-test');
 });
 
 gulp.task('default', require('./task/default.task'));
@@ -42,8 +44,8 @@ gulp.task('template', require('./task/template.task'));
 gulp.task('inject', require('./task/inject.task'));
 gulp.task('inject-prod', require('./task/inject.task').prod);
 gulp.task('delay', require('./task/delay.task'));
-gulp.task('test-copy', require('./task/test-copy.task'));
-gulp.task('test-concat', require('./task/test-concat.task'));
+gulp.task('coveralls', require('./task/coveralls.task'));
 gulp.task('test-karma', require('./task/test-karma.task'));
-gulp.task('test-report', require('./task/test-report.task'));
+gulp.task('test-karma-html', require('./task/test-karma.task').htmlReport);
 gulp.task('watch', require('./task/watch.task'));
+gulp.task('open-test', require('./task/open-browser.task'));

@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
+var nconf = require('nconf');
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
@@ -25,11 +27,15 @@ module.exports.prod = jsTaskProd;
 module.exports.srcFiles = srcFiles;
 
 function jsTask () {
-  gulp.src(srcFiles)
+  return gulp.src(srcFiles)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'))
+    .on('error', onError)
     .pipe(jscs())
     .pipe(jscs.reporter())
+    .pipe(jscs.reporter('fail'))
+    .on('error', onError)
     .pipe(sourcemaps.init())
     .pipe(ngAnnotate({
       single_quotes: true
@@ -38,10 +44,21 @@ function jsTask () {
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(path.buildDir))
     .pipe(livereload());
+
+    function onError(error) {
+      if (error) {
+        if (nconf.get('NODE_ENV') === 'travis') {
+          process.exit(1);
+          return;
+        } else {
+          gutil.beep();
+        }
+      }
+    }
 }
 
 function jsTaskProd () {
-  gulp.src(buildFile)
+  return gulp.src(buildFile)
     .pipe(uglify())
     .pipe(concat('script.js'))
     .pipe(gulp.dest(path.prodDir));

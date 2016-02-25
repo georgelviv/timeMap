@@ -5,7 +5,7 @@
     .module('app.db.utils')
     .factory('dbUtils', dbUtilsApi);
 
-  function dbUtilsApi() {
+  function dbUtilsApi(loggerApi) {
       var dbUtils = {
         onSuccess: onSuccess,
         onError: onError
@@ -24,12 +24,12 @@
         var msg = errorMsg(response);
         if (cbOnError) {
           cbOnError(msg);
+        } else {
+          loggerApi.error(prefixMsg);
         }
-        console.log(prefixMsg || '', msg);
       }
 
       function errorMsg(err) {
-        console.log(err);
         var msg = '';
         if (angular.isString(err)) {
           return err;

@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var stylus = require('gulp-stylus');
+var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCss = require('gulp-minify-css');
 var livereload = require('gulp-livereload');
@@ -16,7 +17,7 @@ module.exports.prod = cssTaskProd;
 module.exports.srcFiles = path.frontDir + '/styl/**/*.styl';
 
 function cssTask () {
-  gulp.src(srcFiles)
+  return gulp.src(srcFiles)
     .pipe(sourcemaps.init())
     .pipe(stylus())
     .pipe(sourcemaps.write('.'))
@@ -25,7 +26,8 @@ function cssTask () {
 }
 
 function cssTaskProd () {
-  gulp.src(buildFile)
+  return gulp.src(buildFile)
     .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(concat('main.css'))
     .pipe(gulp.dest(path.prodDir));
 }

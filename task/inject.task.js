@@ -23,7 +23,7 @@ module.exports.prod = injectTaskProd;
 module.exports.srcFiles = srcFile;
 
 function injectTask () {
-  gulp.src(srcFile)
+  return gulp.src(srcFile)
     .pipe(gulpInject(gulp.src(srcFiles, {read: false}), {
       ignorePath: 'build',
       addRootSlash: false
@@ -33,7 +33,7 @@ function injectTask () {
 }
 
 function injectTaskProd () {
-  gulp.src(srcFile)
+  return gulp.src(srcFile)
     .pipe(gulpInject(gulp.src(srcFilesProd, {read: false}), {
       ignorePath: 'prod',
       addRootSlash: false

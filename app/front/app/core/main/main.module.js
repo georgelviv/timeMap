@@ -7,7 +7,9 @@
       'templates',
       'utils.logger',
       'utils.spinner',
-      'app.auth'
+      'app.auth',
+      'app.timeline',
+      'app.sidebar'
     ]);
 
 })();

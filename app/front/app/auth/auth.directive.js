@@ -15,16 +15,15 @@
 
     return directive;
 
-    function authController(loggerApi, $http){
+    function authController(loggerApi, $http) {
       var vm = this;
       vm.createUser = createUser;
       vm.loginUser = loginUser;
       vm.passportMatch = passportMatch;
       vm.resetForm = resetForm;
-      
       init();
 
-      function createUser(){
+      function createUser() {
         vm.method = 'POST';
         vm.url = '/users';
         vm.user = {
@@ -37,12 +36,12 @@
           then(function successCallback(response) {
             resetForm(vm.registration);
             loggerApi.success('User successfully registered');
-          }, function errorCallback(response){
+          }, function errorCallback(response) {
             loggerApi.error('Registration failed');
           });
       }
 
-      function loginUser(){
+      function loginUser() {
         vm.method = 'POST';
         vm.url = '/login';
         vm.user = {
@@ -54,19 +53,18 @@
           then(function successCallback(response) {
             resetForm(vm.login);
             loggerApi.success('Login succeeded');
-          }, function errorCallback(response){
+          }, function errorCallback(response) {
             loggerApi.error('Login failed');
           });
-      }   
-
-      function init(){
+      }
+      function init() {
         loggerApi.info('app.auth activated');
         vm.currentState = 'login';
       }
 
-      function passportMatch(){
-        if(vm.registration){
-          return  vm.registration.password == vm.registration.confirmPassword
+      function passportMatch() {
+        if (vm.registration) {
+          return vm.registration.password == vm.registration.confirmPassword;
         }
       }
 

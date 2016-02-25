@@ -1,5 +1,8 @@
-# timeMap
+![Timemap logo](https://github.com/georgelviv/timeMap/blob/master/app/front/static/time_logo--black.png)
+
 [<img src="https://travis-ci.org/georgelviv/timeMap.svg?branch=master">](https://travis-ci.org/georgelviv/timeMap)
+[![Coverage Status](https://coveralls.io/repos/github/georgelviv/timeMap/badge.svg?branch=Coveralls)](https://coveralls.io/github/georgelviv/timeMap?branch=Coveralls)
+
 
 Magic starts here.
 

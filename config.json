@@ -5,7 +5,10 @@
     "backendDir": "app/back",
     "prodDir": "prod",
     "bowerDir": "app/front/vendor",
-    "testDir": "test"
+    "testDir": "test",
+    "testSpecSuffixDir": "spec",
+    "coverageDir": "test/coverage",
+    "coverageLcovSuffixDir": "report-lcov"
   },
   "port": "3000",
   "db": {

@@ -1,16 +1,25 @@
 var gulp = require('gulp');
-var rimraf = require('rimraf');
+var del = require('del');
 var path = require('../config').path;
 
 var sourcePath = [
   path.buildDir,
   path.prodDir,
-  path.testDir + '/build'
+  path.testDir + '/build',
+  path.testDir + '/' + path.testSpecSuffixDir,
+  path.coverageDir
 ];
 
 module.exports = cleanTask;
 
-function cleanTask () {
-    return gulp.src(sourcePath, {read: false})
-          .pipe(rimraf());
+function cleanTask (callback) {
+    return del(sourcePath, cb);
+
+    function cb(error) {
+      if (error) {
+        console.error('Error with cleanTask', error);
+        return;
+      }
+      callback();
+    }
 }

@@ -1,5 +1,7 @@
 node_modules/
 test/build
+test/coverage/
+test/spec/
 app/front/vendor/
 build/
 prod/

@@ -10,8 +10,7 @@
         get: get,
         post: post,
         update: update,
-        deleteEvent: deleteEvent,
-        isDiffer: isDiffer
+        deleteEvent: deleteEvent
       };
 
       return dbEvents;
@@ -19,32 +18,15 @@
       function get(cbOnSuccess, cbOnError) {
         $http.get(EVENT_REST_URI).then(
           dbUtils.onSuccess.bind({}, cbOnSuccess),
-          dbUtils.onError.bind({}, 'Error on get events, ', cbOnError)
+          dbUtils.onError.bind({}, 'Error on get events', cbOnError)
         );
-      }
-
-      function isDiffer(eventOne, eventTwo) {
-        var objOne = {};
-        var objTwo = {};
-        if (eventOne.title !== eventTwo.title) {
-          return true;
-        }
-        if (eventOne.description !== eventTwo.description) {
-          return true;
-        }
-        objOne.date = angular.isDate(eventOne.date) ? eventOne.date: (new Date(eventOne.date));
-        objTwo.date = angular.isDate(eventTwo.date) ? eventTwo.date: (new Date(eventTwo.date));
-        if (objOne.date.valueOf() !== objTwo.date.valueOf()) {
-          return true;
-        }
-        return false;
       }
 
       function deleteEvent(id, cbOnSuccess, cbOnError) {
         var postURI = EVENT_REST_URI + '?id=' + id;
         $http.delete(postURI).then(
           dbUtils.onSuccess.bind({}, cbOnSuccess),
-          dbUtils.onError.bind({}, 'Error on delete event, ', cbOnError)
+          dbUtils.onError.bind({}, 'Error on delete event', cbOnError)
         );
       }
 
@@ -52,7 +34,7 @@
         var postURI = EVENT_REST_URI + '?id=' + id;
         $http.put(postURI, event).then(
           dbUtils.onSuccess.bind({}, cbOnSuccess),
-          dbUtils.onError.bind({}, 'Error on update event, ', cbOnError)
+          dbUtils.onError.bind({}, 'Error on update event', cbOnError)
         );
       }
 
@@ -65,7 +47,7 @@
         }
         $http.post(EVENT_REST_URI, event).then(
           dbUtils.onSuccess.bind({}, cbOnSuccess),
-          dbUtils.onError.bind({}, 'Error on post event, ', cbOnError)
+          dbUtils.onError.bind({}, 'Error on post event', cbOnError)
         );
       }
 

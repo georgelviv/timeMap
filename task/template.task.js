@@ -10,7 +10,7 @@ module.exports = templateTask;
 module.exports.srcFiles = srcFiles;
 
 function templateTask () {
-  gulp.src(srcFiles)
+  return gulp.src(srcFiles)
     .pipe(templateCache({
       standalone: true
     }))

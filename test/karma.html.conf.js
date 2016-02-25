@@ -1,9 +1,9 @@
 // Karma configuration
 // Generated on Mon Nov 16 2015 15:21:05 GMT+0200 (FLE Standard Time)
-var path = require('./config').path;
+var path = require('../config').path;
 
 module.exports = function(config) {
-  config.set({
+  var configObj = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -16,11 +16,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      path.buildDir + '/vendor.js',
-      path.frontDir + '/vendor/angular-mocks/angular-mocks.js',
-      path.buildDir + '/templates.js',
-      path.buildDir + '/app.js',
-      path.frontDir + '/app/**/*.spec.js'
+      '../' + path.buildDir + '/vendor.js',
+      '../' + path.frontDir + '/vendor/angular-mocks/angular-mocks.js',
+      '../' + path.buildDir + '/templates.js',
+      '../' + path.buildDir + '/app.js',
+      '../' + path.frontDir + '/app/**/*.spec.js'
     ],
 
 
@@ -28,21 +28,29 @@ module.exports = function(config) {
     exclude: [
     ],
 
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-    },
-
-
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec'],
+    reporters: ['html', 'coverage'],
 
+    htmlReporter: {
+      outputDir: path.testDir, // where to put the reports
+      templatePath: null, // set if you moved jasmine_template.html
+      focusOnFailures: true, // reports show failures on start
+      namedFiles: false, // name files instead of creating sub-directories
+      pageTitle: null, // page title for reports; browser info by default
+      urlFriendlyName: false, // simply replaces spaces with _ for files/dirs
+      reportName: path.testSpecSuffixDir, // report summary filename; browser info by default
+
+
+      // experimental
+      preserveDescribeNesting: false, // folded suites stay folded
+      foldAll: false, // reports start folded (only with preserveDescribeNesting)
+    },
 
     // web server port
     port: 9876,
+    preprocessors: {},
 
 
     // enable / disable colors in the output (reporters and logs)
@@ -69,6 +77,16 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultanous
-    concurrency: Infinity
-  });
+    concurrency: Infinity,
+    coverageReporter: {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'html', subdir: 'report-html' }
+      ]
+    }
+  };
+
+  configObj.preprocessors['../' + path.buildDir + '/app.js'] = ['coverage'];
+
+  config.set(configObj);
 };
