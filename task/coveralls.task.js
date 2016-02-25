@@ -7,7 +7,6 @@ var srcFile = [path.coverageDir, path.coverageLcovSuffixDir, 'lcov.info'].join('
 module.exports = coverallsTask;
 
 function coverallsTask () {
-  console.log(srcFile);
   return gulp.src(srcFile)
     .pipe(coveralls());
 }
