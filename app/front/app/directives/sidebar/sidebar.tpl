@@ -12,7 +12,12 @@
       </div>
     </md-toolbar>
     <md-content layout-padding="">
-      <event is-new="true"></event>
+      <div  ng-show="vm.context.state === 'event'">
+        <event is-new="true"></event>
+      </div>
+      <div  ng-show="vm.context.state === 'login'">
+        <auth-form></auth-form>
+      </div>
     </md-content>
     <!--<div ng-show="vm.isAddEvent">-->
     <div>

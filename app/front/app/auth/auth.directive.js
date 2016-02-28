@@ -11,6 +11,9 @@
       controllerAs: 'vm',
       templateUrl: 'auth/auth.tpl',
       restrict: 'E',
+      scope: {
+        isNew: '@'
+      }
     };
 
     return directive;
@@ -34,7 +37,7 @@
         console.log('user',vm.user);
         $http({method: vm.method, url: vm.url, data: vm.user}).
           then(function successCallback(response) {
-            resetForm(vm.registration);
+            resetForm(vm.registrationForm, vm.registration);
             loggerApi.success('User successfully registered');
           }, function errorCallback(response) {
             loggerApi.error('Registration failed');
@@ -51,7 +54,7 @@
 
         $http({method: vm.method, url: vm.url, data: vm.user}).
           then(function successCallback(response) {
-            resetForm(vm.login);
+            resetForm(vm.login, vm.login);
             loggerApi.success('Login succeeded');
           }, function errorCallback(response) {
             loggerApi.error('Login failed');
@@ -64,13 +67,19 @@
 
       function passportMatch() {
         if (vm.registration) {
-          return vm.registration.password == vm.registration.confirmPassword;
+          return vm.registration.password === vm.registration.confirmPassword;
         }
       }
 
-      function resetForm(form) {
+      function resetForm(form, model) {
         form.$setPristine();
         form.$setUntouched();
+        for (var key in model) {
+          if (model.hasOwnProperty(key) && key.indexOf('$') !== 0) {
+            console.log(model[key]);
+            model[key] = '';
+          }
+        }
       }
     }
   }
