@@ -8,7 +8,8 @@
       'utils.logger',
       'utils.spinner',
       'app.timeline',
-      'app.sidebar'
+      'app.sidebar',
+      'app.events'
     ]);
 
 })();

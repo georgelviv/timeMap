@@ -2,6 +2,8 @@
   'use strict';
 
   angular
-    .module('app.events', []);
+    .module('app.events', [
+      'app.db.events'
+    ]);
 
 })();

@@ -5,6 +5,8 @@
     .module('app.main')
     .controller('MainCtrl', MainController);
 
-  function MainController() {}
+  function MainController(eventsList) {
+    eventsList.get();
+  }
 
 })();
