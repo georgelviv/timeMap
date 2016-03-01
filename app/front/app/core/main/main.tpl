@@ -7,13 +7,10 @@
         </div>
         <div flex="60" layout="row"  layout-align="center center">
           <div>
-          <md-button ng-href="" flex>
-            home
-          </md-button>
-          <md-button ng-href="/login" flex>
-            login
-          </md-button>
-            <md-button ng-href="/register" flex>
+            <md-button ng-href="/login">
+              login
+            </md-button>
+            <md-button ng-href="/register">
               register
             </md-button>
           </div>
@@ -22,7 +19,6 @@
           <div>
             <md-button class="md-raised" show-side-bar>create event</md-button>
           </div>
-
         </div>
       </div>
     </md-toolbar>

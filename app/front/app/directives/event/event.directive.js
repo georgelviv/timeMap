@@ -5,7 +5,7 @@
     .module('app.event')
     .directive('event', eventDirective);
 
-  function eventDirective() {
+  function eventDirective(eventsList) {
     var directive = {
       controller: eventCtrl,
       controllerAs: 'vm',
@@ -18,7 +18,7 @@
 
     return directive;
 
-    function eventCtrl($scope, loggerApi, dbEvents) {
+    function eventCtrl($scope, loggerApi) {
       var vm = this;
 
       init();
@@ -55,9 +55,10 @@
       }
 
       function submitEvent() {
-        dbEvents.post(vm.editEvent, onSuccessPost);
+        var eventObj = new eventsList.Event(vm.editEvent);
+        eventObj.save(onSave);
 
-        function onSuccessPost() {
+        function onSave() {
           loggerApi.success('Event posted');
           setEditDefault();
           resetForm();

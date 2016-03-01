@@ -4,7 +4,8 @@
   angular
     .module('app.event', [
       'utils.logger',
-      'app.db.events'
+      'app.db.events',
+      'app.events'
     ]);
 
 })();
