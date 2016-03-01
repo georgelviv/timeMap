@@ -12,6 +12,7 @@ var vendorArr = [
 	'angular-messages/angular-messages.js',
 	'angular-material/angular-material.js',
 	'toastr/toastr.js',
+	'vis/dist/vis.min.js'
 ];
 var filesArr = buildFilesArr();
 

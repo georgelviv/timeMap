@@ -68,6 +68,7 @@
         "console": false,
         "afterEach": false,
         "crypto": false,
-        "google": false
+        "google": false,
+        "vis": false
     }
 }

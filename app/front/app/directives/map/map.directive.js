@@ -36,7 +36,6 @@
         }, map);
       });
 
-
       mapApi.getEvents(showData);
 
       function showData(data) {

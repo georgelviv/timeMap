@@ -1,3 +1,5 @@
 <section class="timeline" flex="30">
-  Timeline should be here
+  <div id="visualization"></div>
+  <button data-ng-click="zoom(0.2)">+</button>
+  <button>{{data}}</button>
 </section>
