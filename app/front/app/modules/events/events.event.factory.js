@@ -29,7 +29,7 @@
           this.saveId = saveId;
 
           function addToArray() {
-            if (privateData.inArray) {
+            if (privateData.inArray || !privateData.id) {
               return;
             }
             events.push(this);
@@ -68,7 +68,19 @@
         EventClass.prototype.remove = remove;
 
         function remove(cb, cbError) {
-          console.log('Removed');
+          var idEvent = this.getId();
+
+          dbEvents.deleteEvent(idEvent, onSuccessDelete, cbError);
+
+          function onSuccessDelete() {
+            events = events.filter(filterEvents);
+            if (cb) {
+              cb();
+            }
+            function filterEvents(value) {
+              return idEvent === value.id;
+            }
+          }
         }
 
         function save(updateData, cb, cbError) {
@@ -91,8 +103,8 @@
 
           function onSuccessPost(data) {
             this.update(updateData);
-            this.addToArray();
             this.saveId(data._id);
+            this.addToArray();
             if (cbOnSave) {
               cbOnSave();
             }
