@@ -34,7 +34,6 @@
           password: vm.registration.password,
           email: vm.registration.email
         };
-        console.log('user',vm.user);
         $http({method: vm.method, url: vm.url, data: vm.user}).
           then(function successCallback(response) {
             resetForm(vm.registrationForm, vm.registration);
@@ -76,7 +75,6 @@
         form.$setUntouched();
         for (var key in model) {
           if (model.hasOwnProperty(key) && key.indexOf('$') !== 0) {
-            console.log(model[key]);
             model[key] = '';
           }
         }

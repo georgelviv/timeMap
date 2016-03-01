@@ -29,14 +29,9 @@ function defineUserSchema() {
           unique: true
       },
       password: String,
-      age: Number,
       email: String
   });
 
   userApi.schema.methods.introducing = introducing;
-
-  function introducing() {
-      return 'Hi folks, my name is ' + this.username + ', ' + 'I am ' + this.age;
-  }
 
 }
