@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node boot",
     "test": "gulp test-run",
-    "postinstall": "./node_modules/bower/bin/bower install && npm install --dev && gulp build && gulp prod"
+    "postinstall": "./node_modules/bower/bin/bower install && gulp build && gulp prod"
   },
   "author": "",
   "license": "ISC",
