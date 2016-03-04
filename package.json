@@ -4,7 +4,9 @@
   "description": "Helps you to discover events over time through the map",
   "main": "server.js",
   "scripts": {
-    "test": "gulp test-run"
+    "start": "NODE_ENV=production node boot",
+    "test": "gulp test-run",
+    "postinstall": "./node_modules/bower/bin/bower install && gulp build && gulp prod"
   },
   "author": "",
   "license": "ISC",
@@ -38,6 +40,7 @@
   },
   "dependencies": {
     "body-parser": "^1.14.2",
+    "bower": "^1.7.7",
     "express": "^4.13.3",
     "mongoose": "^4.2.9",
     "nconf": "^0.8.2",
