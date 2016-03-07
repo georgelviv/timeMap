@@ -16,10 +16,10 @@
 
     return directive;
   }
-
+  var sidebarContext = {};
   function sidebarCtrl($mdSidenav) {
     var vm = this;
-
+    vm.context = sidebarContext;
     vm.addEvent = addEvent;
     vm.isAddEvent = false;
     vm.closeSideBar = closeSideBar;
@@ -40,7 +40,7 @@
       controller: showSideBarCtrl,
       link: function(scope, element, attrs) {
         element.bind('click',function() {
-          scope.showSideBar();
+          scope.showSideBar(attrs.showSideBar);
         });
       }
     };
@@ -48,9 +48,9 @@
   }
 
   function showSideBarCtrl($scope, $mdSidenav) {
-    $scope.showSideBar = function() {
+    $scope.showSideBar = function(state) {
       buildToggler('right');
-
+      sidebarContext.state = state;
       function buildToggler(navID) {
         $mdSidenav(navID).toggle();
       }
