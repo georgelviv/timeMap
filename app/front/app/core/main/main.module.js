@@ -9,7 +9,8 @@
       'utils.spinner',
       'app.auth',
       'app.timeline',
-      'app.sidebar'
+      'app.sidebar',
+      'app.events'
     ]);
 
 })();

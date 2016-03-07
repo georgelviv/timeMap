@@ -10,6 +10,12 @@
           <md-button ng-href="" flex>
             home
           </md-button>
+            <md-button ng-href="/login">
+              login
+            </md-button>
+            <md-button ng-href="/register">
+              register
+            </md-button>
           </div>
         </div>
         <div flex="20" layout="row">
@@ -21,14 +27,13 @@
           <div>
             <md-button class="md-raised" show-side-bar="event">create event</md-button>
           </div>
-
         </div>
       </div>
     </md-toolbar>
   </header>
   <section class="content" flex="grow" layout="row">
     <map></map>
-     
+
     <sidebar></sidebar>
   </section>
   <time-line></time-line>
