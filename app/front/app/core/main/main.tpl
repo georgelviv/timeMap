@@ -9,12 +9,19 @@
         </div>
         <div flex="20" layout="row" layout-align="end">
           <div>
-            <md-button class="md-raised" show-side-bar="login" flex>
+            <md-button class="md-raised" ng-click="vm.showSideBar('tags')">
+              tags
+            </md-button>
+          </div>
+          <div>
+            <md-button class="md-raised" ng-click="vm.showSideBar('login')">
               login/registration
             </md-button>
           </div>
           <div>
-            <md-button class="md-raised" show-side-bar="event">create event</md-button>
+            <md-button class="md-raised" ng-click="vm.showSideBar('event')">
+              create event
+            </md-button>
           </div>
         </div>
       </div>
@@ -22,8 +29,7 @@
   </header>
   <section class="content" flex="grow" layout="row">
     <map></map>
-
-    <sidebar></sidebar>
+    <sidebar state="vm.sidebarState" sidebar-id="vm.sideBarID"></sidebar>
   </section>
   <time-line></time-line>
   <footer>
