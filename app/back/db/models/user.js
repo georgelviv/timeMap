@@ -32,6 +32,4 @@ function defineUserSchema() {
       email: String
   });
 
-  userApi.schema.methods.introducing = introducing;
-
 }

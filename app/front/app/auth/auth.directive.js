@@ -60,7 +60,6 @@
           });
       }
       function init() {
-        loggerApi.info('app.auth activated');
         vm.currentState = 'login';
       }
 
