@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "angular-mocks": "~1.4.7",
-    "jasmine-core": "jasmine#~2.3.4"
+    "jasmine-core": "jasmine#~2.3.4",
+    "vis": "~4.15.1"
   }
 }
