@@ -1,9 +1,16 @@
-{{vm.currentState}}
 <md-sidenav class="md-sidenav-right" md-component-id="right">
     <md-toolbar layout="row">
       <div class="md-toolbar-tools">
         <h2>
-          <span>Side Panel {{!!closeSideBar}}</span>
+          <span ng-show="state === 'event'">
+            Events
+          </span>
+          <span ng-show="state === 'login'">
+            Sign In / Sign up
+          </span>
+          <span ng-show="state === 'tags'">
+            Tags
+          </span>
         </h2>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideBar()">

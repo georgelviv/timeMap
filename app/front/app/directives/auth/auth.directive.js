@@ -9,7 +9,7 @@
     var directive = {
       controller: authController,
       controllerAs: 'vm',
-      templateUrl: 'auth/auth.tpl',
+      templateUrl: 'directives/auth/auth.tpl',
       restrict: 'E',
       scope: {
         isNew: '@'
