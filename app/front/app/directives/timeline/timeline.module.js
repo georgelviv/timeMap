@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('app.timeline', ['ngVis']);
+    .module('app.timeline', []);
 
 })();

@@ -1,5 +1,8 @@
-<section class="timeline" flex="30">
-  <div id="visualization"></div>
-  <button data-ng-click="zoom(0.2)">+</button>
-  <button>{{data}}</button>
+<section class="timeline" flex="15">
+  <div id="visualization">
+	  <div class="zoom-btns-wrap">
+	  	<i class="material-icons zoom-btn zoom-in-btn">zoom_in</i>
+		<i class="material-icons zoom-btn zoom-out-btn">zoom_out</i>
+	  </div>  
+  </div>
 </section>

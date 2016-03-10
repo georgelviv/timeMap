@@ -10,7 +10,7 @@
     };
     return timeLineActions;
 
-    function zoom(percentage) {
+    function zoom(timeline, percentage) {
       var range = timeline.getWindow();
       var interval = range.end - range.start;
 

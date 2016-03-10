@@ -39,16 +39,19 @@
       mapApi.getEvents(showData);
 
       function showData(data) {
-        console.log(data);
-        for (var i = 0; i < data.length; i++) {
+        angular.forEach(data, function(event, i) {
           mapApi.createMarker({
-            lat: data[i].coordinates.latitude,
-            lng: data[i].coordinates.longitude,
-            title: data[i].title
+            lat: event.coordinates.latitude,
+            lng: event.coordinates.longitude,
+            title: event.title
           }, map);
-        }
+
+        });
       }
 
+      function mapCtrl() {
+
+      }
     }
   }
 })();
