@@ -3,7 +3,8 @@
 
   angular
     .module('app.sidebar', [
-      'app.event'
+      'app.event',
+      'app.tags'
     ]);
 
 })();

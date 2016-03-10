@@ -1,6 +1,8 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
+    validator = require('express-validator'),
     nconf = require('nconf');
+
 
 var server = {
   init: init,
@@ -8,6 +10,7 @@ var server = {
 };
 
 var routes,
+    auth,
     isInited = false;
 
 
@@ -23,8 +26,10 @@ function init() {
   server.app = express();
   server.app.use(bodyParser.urlencoded({ extended: false }));
   server.app.use(bodyParser.json());
-  server.app.use(express.static(nconf.get('frontPath') + '/'));
+  server.app.use(validator()); 
 
+  server.app.use(express.static(nconf.get('frontPath') + '/'));
+  auth = require('./auth').init();
   routes = require('./routes').init();
 }
 

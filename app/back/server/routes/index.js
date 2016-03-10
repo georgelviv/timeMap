@@ -18,6 +18,7 @@ function init() {
 
   // Db related
   server.app.delete('/db', onCleanDB);
+
   routeEvent.init();
 
   server.app.get('*', handle404);

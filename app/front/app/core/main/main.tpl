@@ -5,19 +5,23 @@
         <div flex="20" layout="row">
           <md-button ng-href="/#/" aria-label="logo" class="logo"></md-button>
         </div>
-        <div flex="60" layout="row"  layout-align="center center">
-          <div>
-            <md-button ng-href="/login">
-              login
-            </md-button>
-            <md-button ng-href="/register">
-              register
-            </md-button>
-          </div>
+        <div flex="80" layout="row"  layout-align="center center">
         </div>
         <div flex="20" layout="row" layout-align="end">
           <div>
-            <md-button class="md-raised" show-side-bar>create event</md-button>
+            <md-button class="md-raised" ng-click="vm.showSideBar('tags')">
+              tags
+            </md-button>
+          </div>
+          <div>
+            <md-button class="md-raised" ng-click="vm.showSideBar('login')">
+              login/registration
+            </md-button>
+          </div>
+          <div>
+            <md-button class="md-raised" ng-click="vm.showSideBar('event')">
+              create event
+            </md-button>
           </div>
         </div>
       </div>
@@ -25,7 +29,7 @@
   </header>
   <section class="content" flex="grow" layout="row">
     <map></map>
-    <sidebar></sidebar>
+    <sidebar state="vm.sidebarState" sidebar-id="vm.sideBarID"></sidebar>
   </section>
   <time-line></time-line>
   <footer>
