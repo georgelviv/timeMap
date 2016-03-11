@@ -3,7 +3,9 @@
 
   angular
     .module('app.map', [
-      'ngRoute'
+      'ngRoute',
+      'utils.logger',
+      'app.event'
     ]);
 
 })();
