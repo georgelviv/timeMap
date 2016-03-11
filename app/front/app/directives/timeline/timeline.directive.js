@@ -17,7 +17,11 @@
     function init() {
       var container = $('#visualization');
       var items = [];
-      var options = {};
+      var options = {
+        height: '184px',
+        autoResize: true,
+        zoomMin: 691200000
+      };
       var timeline = new vis.Timeline(container[0], items, options);
       timeline.setWindow('2014-04-20','2016-04-20');
 
