@@ -26,8 +26,8 @@ function init() {
   server.app = express();
   server.app.use(bodyParser.urlencoded({ extended: false }));
   server.app.use(bodyParser.json());
-  server.app.use(validator()); 
-
+  server.app.use(validator());
+  server.app.use(require('./controllers'));
   server.app.use(express.static(nconf.get('frontPath') + '/'));
   auth = require('./auth').init();
   routes = require('./routes').init();
