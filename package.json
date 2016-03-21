@@ -4,7 +4,7 @@
   "description": "Helps you to discover events over time through the map",
   "main": "boot.js",
   "scripts": {
-    "start": "NODE_ENV=production node boot",
+    "start": "NODE_ENV=production node boot --port process.env.PORT",
     "test": "gulp test-run",
     "postinstall": "bower install && gulp prod"
   },

@@ -1,12 +1,12 @@
 {
-  "name": "arduinoJs",
+  "name": "timeMap",
   "version": "0.0.0",
-  "homepage": "https://github.com/georgelviv/arduinoJs",
+  "homepage": "https://github.com/georgelviv/timeMap",
   "authors": [
-    "Yura Chukarina <lvivgeorge@gmail.com>"
+    "Yura <lvivgeorge@gmail.com>"
   ],
-  "description": "ardionJs - examples of arduion with js",
-  "main": "entry.js",
+  "description": "timeMap - helps you to discover events over time through the map",
+  "main": "boot.js",
   "moduleType": [],
   "license": "MIT",
   "ignore": [
