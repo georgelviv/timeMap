@@ -10,7 +10,7 @@
     "coverageDir": "test/coverage",
     "coverageLcovSuffixDir": "report-lcov"
   },
-  "port": "3000",
+  "PORT": "3000",
   "db": {
     "production":{
       "uri": "mongodb://admin:admin@ds027415.mongolab.com:27415/timemap"

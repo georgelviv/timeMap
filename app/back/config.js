@@ -22,6 +22,5 @@ function init () {
     nconf.set('frontPath', nconf.get('path').prodDir);
   }
 
-
   console.log('Mode: ' + nconf.get('NODE_ENV'));
 }

@@ -33,5 +33,5 @@ $ node boot     // To boot app
 ```
 Available parameters with boot:
 ```
-$ node boot --port 2867    // Run server on 2867 port
+$ node boot --PORT 2867    // Run server on 2867 port
 ```

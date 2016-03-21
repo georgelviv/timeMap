@@ -21,7 +21,7 @@ function init() {
   }
   isInited = true;
 
-  server.port = nconf.get('port');
+  server.port = nconf.get('PORT');
   server.app = express();
   server.app.use(bodyParser.urlencoded({ extended: false }));
   server.app.use(bodyParser.json());
