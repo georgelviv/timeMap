@@ -36,7 +36,7 @@
     <md-toolbar layout="row" layout="row">
       <div class="md-toolbar-tools">
         <div flex="100" layout="row"  layout-align="center center">
-          <div>TIME MAP version 0.0</div>
+          <div>TIME MAP version 0.1</div>
         </div>
       </div>
     </md-toolbar>
