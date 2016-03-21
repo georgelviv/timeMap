@@ -2,7 +2,7 @@
   "name": "timeMap",
   "version": "0.0.1",
   "description": "Helps you to discover events over time through the map",
-  "main": "server.js",
+  "main": "boot.js",
   "scripts": {
     "start": "NODE_ENV=production node boot",
     "test": "gulp test-run",
