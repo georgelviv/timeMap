@@ -28,6 +28,7 @@
       </div>
       <div ng-show="state === 'tags'">
         <tags></tags>
+        <event-list></event-list>
       </div>
     </md-content>
     <!--<div ng-show="vm.isAddEvent">-->
