@@ -4,7 +4,8 @@
   angular
     .module('app.sidebar', [
       'app.event',
-      'app.tags'
+      'app.tags',
+      'app.eventList'
     ]);
 
 })();

@@ -5,7 +5,7 @@
     .module('app.map')
     .factory('mapApi', mapApi);
 
-  function mapApi(dbEvents, loggerApi) {
+  function mapApi(dbEvents, loggerApi, eventsList) {
 
     var mapActions = {
       createMarker: createMarker,
@@ -25,8 +25,8 @@
     function getEvents(setData) {
       dbEvents.get(success);
 
-      function success(data) {
-        setData(data);
+      function success() {
+        setData(eventsList);
       }
     }
   }

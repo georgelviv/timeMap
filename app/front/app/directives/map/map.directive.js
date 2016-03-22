@@ -41,9 +41,9 @@
       function showData(data) {
         angular.forEach(data, function(event, i) {
           mapApi.createMarker({
-            lat: event.coordinates.latitude,
-            lng: event.coordinates.longitude,
-            title: event.title
+            lat: event.getEventInfo().coordinates.latitude,
+            lng: event.getEventInfo().coordinates.longitude,
+            title: event.getEventInfo().title
           }, map);
 
         });
