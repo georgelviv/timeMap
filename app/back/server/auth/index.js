@@ -17,15 +17,18 @@ function init() {
     return;
   }
   isInited = true;
+
   server.app.use(expressSession({
-    //generate random string for secret
     secret: Math.random().toString(36).replace(/[^a-z]+/g, ''),
     cookie: {
       path: '/',
       httpOnly: true,
       secure: false
-    }
+    },
+    resave: true,
+    saveUninitialized: true
   }));
+
   server.app.use(passport.initialize());
   server.app.use(passport.session());
   // Db related
@@ -34,7 +37,7 @@ function init() {
   server.app.get('/users', getUsers);
   server.app.get('/users/:id' , getUserById);
   server.app.delete('/users/:id' , deleteUserById);
-  
+
 
   // define default 'local' strategy, used for login
   passport.use(new localStrategy(loginCallback));
@@ -43,13 +46,13 @@ function init() {
   passport.use('signup', new localStrategy({passReqToCallback : true}, signupCallback));
 
   passport.serializeUser(serializeUser);
-  passport.deserializeUser(deserializeUser); 
+  passport.deserializeUser(deserializeUser);
 }
 
 function getUsers(req, res){
   db.models.User.find({}, function(err, users){
-   res.send(users); 
-  })
+   res.send(users);
+ });
 }
 
 function deleteUserById(req, res){
@@ -66,7 +69,6 @@ function deleteUserById(req, res){
 
 function getUserById(req, res){
   var id = req.params.id;
-  console.log('User has id: ' + id);
   db.models.User.find({ _id: id }, function (err, user) {
       if(err) {
           res.send(err);
@@ -110,7 +112,9 @@ function createUser(req, res) {
   var errors = formValidation(req, res);
   if (errors) {
     res.status(400).json({
-          err: errors.map(function(err){return err.msg}).join("; "),
+          err: errors.map(function (err){
+              return err.msg;
+            }).join('; '),
           sessionId: req.session.id
         });
     return;
@@ -145,29 +149,39 @@ function createUser(req, res) {
 
 function loginCallback(username, password, authCheckDone) {
       db.models.User.findOne({ username: username }, function(err, user) {
-        if (err) return authCheckDone(err);
-        if (!user) return authCheckDone(null, false, 'No such user');
-        if (password != user.password) return authCheckDone(null, false, 'Incorrect password.');
-
+        if (err) {
+          return authCheckDone(err);
+        }
+        if (!user) {
+          return authCheckDone(null, false, 'No such user');
+        }
+        if (password !== user.password) {
+          return authCheckDone(null, false, 'Incorrect password.');
+        }
         authCheckDone(null, user);
-        
+
       });
     }
 // the 'verify' function for 'signup' strategy
-function signupCallback (req, username, password, authCheckDone) {
-  db.models.User.findOne({username: username}, function(err, user) {
-    if (err) return authCheckDone(err);
-    if (user) {
+function signupCallback(req, username, password, authCheckDone) {
+  db.models.User.findOne({username: username}, function(err, existUser) {
+    if (err) {
+      return authCheckDone(err);
+    }
+    if (existUser) {
       return authCheckDone(null,
         false,
         'User ' + username + ' already exists.');
     }
     // it's safe, now create the user account
-    var user = req.body;
-    console.log('uswer', req.body);
-    new db.models.User(user).save( function(err, user) {
-      if (err) return authCheckDone(err);
-      if (!user) return authCheckDone('Failed on create user :(');
+    var userBody = req.body;
+    var user = new db.models.User(userBody).save( function(err, user) {
+      if (err) {
+        return authCheckDone(err);
+      }
+      if (!user) {
+        return authCheckDone('Failed on create user :(');
+      }
       authCheckDone(null, user);
     });
 
@@ -176,7 +190,7 @@ function signupCallback (req, username, password, authCheckDone) {
 function formValidation(req, res){
   req.checkBody('username', 'Username can not be empty').notEmpty();
   req.assert('password', 'Mininum 8 characters required').len(8);
-  req.checkBody("email", "Enter a valid email address").isEmail();
+  req.checkBody('email', 'Enter a valid email address').isEmail();
   return req.validationErrors();
 
 }
