@@ -17,6 +17,6 @@ function staticTask () {
 }
 
 function staticTaskProd () {
-  return gulp.src(path.buildDir + staticPathPrefix)
+  return gulp.src(srcFiles)
     .pipe(gulp.dest(path.prodDir + staticPathPrefix));
 }
