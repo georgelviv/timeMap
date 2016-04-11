@@ -21,44 +21,68 @@ router
         });
     })
     .post('/', function(req, res){
-        var event = new Event(),
+        var event,
             data = req.body,
-            errMesage;
+            errMesage = validationEvent(data);
 
-        if (!data.title) {
-            errMesage = 'Event title is required!';
-        }
-        if (!data.date) {
-            errMesage = 'Event date is required!';
-        }
-        if (!data.coordinates.latitude) {
-            errMesage = 'Event latitude is required!';
-        }
-        if (!data.coordinates.longitude) {
-            errMesage = 'Event longitude is required!';
-        }
         if (!!errMesage) {
             res.status(500).send({ error: errMesage});
             return;
         }
+        event = new Event(req.body);
 
-        var event = db.models.Event(data);
-        event.save(onSave);
+        event.save(function(err, resss) {
+            if (err)
+                res.send(err);
+            res.json(event);
+        });
+    })
+    .get('/:id', function(req, res) {
+        Event.findById(req.params.id, function(err, event) {
+            if (err)
+                res.send(err);
+            res.json(event);
+        });
+    })
+    .put('/:id', function(req, res) {
+        var data = req.body,
+            errMesage = validationEvent(data);
 
-        function onSave(err) {
-            if (err) {
-                cb(err);
-                return;
-            }
-            var eventData = data;
-            eventData._id = event._id;
-            cb(null, eventData);
+        if (!!errMesage) {
+            res.status(500).send({ error: errMesage});
+            return;
         }
-            event.save(function(err) {
-                if (err)
-                    res.send(err);
-
-                res.json({data: event });
-            });
+        Event.findByIdAndUpdate(req.params.id, data, function (err, event) {
+            if (err)
+                res.send(err);
+            res.json(req.body);
+        });
+    })
+    .delete('/:id', function(req, res) {
+        Event.findByIdAndRemove(req.params.id, function(err) {
+            if (err)
+                res.send(err);
+            res.send('removed event' + req.params.id);
+        });
     });
+
+var validationEvent = function (data) {
+    var errMesage = false;
+    if (!data.title) {
+        errMesage = 'Event title is required!';
+    }
+    if (!data.date) {
+        errMesage = 'Event date is required!';
+    }
+    if(!data.coordinates) {
+        data.coordinates = {};
+    }
+    if (!data.coordinates.latitude) {
+        errMesage = 'Event latitude is required!';
+    }
+    if (!data.coordinates.longitude) {
+        errMesage = 'Event longitude is required!';
+    }
+    return errMesage;
+};
 module.exports = router;
