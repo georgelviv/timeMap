@@ -7,7 +7,7 @@ nconf.env().argv();
 
 gulp.task('prod', function () {
   return runSequence(['static', 'css', 'vendor-css', 'js', 'vendor-js', 'template'], 'delay',
-              'inject', ['css-prod', 'js-prod'], 'delay',
+              'inject', ['css-prod', 'js-prod'], 'static-prod', 'delay',
               'inject-prod');
 });
 
@@ -33,6 +33,7 @@ gulp.task('test', function () {
 
 gulp.task('default', require('./task/default.task'));
 gulp.task('static', require('./task/static.task'));
+gulp.task('static-prod', require('./task/static.task').prod);
 gulp.task('clean', require('./task/clean.task'));
 gulp.task('css', require('./task/css.task'));
 gulp.task('vendor-css', require('./task/vendor-css.task'));

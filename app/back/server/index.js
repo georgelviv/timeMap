@@ -1,6 +1,8 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     validator = require('express-validator'),
+    helmet = require('helmet'),
+    compression = require('compression')
     nconf = require('nconf');
 
 var server = {
@@ -26,6 +28,8 @@ function init() {
     server.app = express();
   server.app.use(bodyParser.urlencoded({ extended: false }));
   server.app.use(bodyParser.json());
+  server.app.use(helmet());
+  server.app.use(compression());
   server.app.use(validator());
 
   server.app.use(express.static(nconf.get('frontPath') + '/'));
