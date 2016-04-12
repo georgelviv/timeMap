@@ -8,7 +8,9 @@
 		    	<p class="event-date">{{ event.date | date : format : timezone}}</p>
 		    </div>
 	    	<i class="material-icons edit-icon">mode_edit</i>
-	    	<i class="material-icons ">delete</i>
+	    	<button ng-click="vm.deleteEvent(event._id)">
+	    		<i class="material-icons">delete</i>
+	    	</button>
 		    <md-divider ng-if="!$last"></md-divider>
 	  	</md-list-item>
 	</md-list>
@@ -20,5 +22,5 @@
 			<i class="material-icons">keyboard_arrow_right</i>
 		</button>
 	</div>
-	
+	{{$parent.data}}
 </div>

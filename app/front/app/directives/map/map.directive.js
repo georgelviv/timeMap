@@ -5,19 +5,24 @@
     .module('app.map')
     .directive('map', initMap);
 
-  function initMap(mapApi, dbEvents) {
+  function initMap($rootScope, mapApi, eventsService) {
     var mapDirective = {
       restrict: 'E',
       replace: true,
-      templateUrl: 'directives/map/map.tpl',
-      link: init
+      controller: mapCtrl,
+      templateUrl: 'directives/map/map.tpl'
     };
     return mapDirective;
 
-    function init(scope, element, attrs) {
-      var mapBlock = document.getElementById(attrs.id);
+    function mapCtrl($scope) {
+      var vm = this;
+      var mapBlock = document.getElementById('map-block');
       var map = new google.maps.Map(mapBlock, getMapOptions());
-
+      $rootScope.$on('app-events-fetched', function() {
+        vm.events = eventsService.getAllEvents();
+        showData(vm.events);
+      });
+       
       function getMapOptions() {
         return {
           zoom: 6,
@@ -36,21 +41,15 @@
         }, map);
       });
 
-      mapApi.getEvents(showData);
-
       function showData(data) {
         angular.forEach(data, function(event, i) {
           mapApi.createMarker({
-            lat: event.getEventInfo().coordinates.latitude,
-            lng: event.getEventInfo().coordinates.longitude,
-            title: event.getEventInfo().title
+            lat: event.coordinates.latitude,
+            lng: event.coordinates.longitude,
+            title: event.title
           }, map);
 
         });
-      }
-
-      function mapCtrl() {
-
       }
     }
   }

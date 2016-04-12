@@ -5,7 +5,7 @@
     .module('app.event')
     .directive('event', eventDirective);
 
-  function eventDirective(eventsList) {
+  function eventDirective(eventsList, eventsService) {
     var directive = {
       controller: eventCtrl,
       controllerAs: 'vm',
@@ -55,14 +55,11 @@
       }
 
       function submitEvent() {
-        var eventObj = new eventsList.Event(vm.editEvent);
-        eventObj.save(onSave);
-
-        function onSave() {
+        eventsService.addEvent(vm.editEvent).then(function() {
           loggerApi.success('Event posted');
           setEditDefault();
           resetForm();
-        }
+        });
       }
 
     }

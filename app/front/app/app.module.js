@@ -9,7 +9,8 @@
       'app.404',
       'app.dbtools',
       'app.auth',
-      'app.map'
+      'app.map',
+      'app.eventsApi'
     ]);
 
 })();
