@@ -26,7 +26,7 @@
       vm.resetForm = resetForm;
       init();
 
-      function createUser() {
+      function createUser(form) {
         var user = {
           username: vm.registration.username,
           password: vm.registration.password,
@@ -36,29 +36,33 @@
         authService.register(user).then(onSuccess, onError);
 
         function onSuccess(data) {
-          resetForm(vm.registrationForm, vm.registration);
-          loggerApi.success('User successfully registered');
+          resetForm(form);
+          loggerApi.success('User successfully registered.');
         }
         function onError(error) {
           if (error.message) {
             loggerApi.error(error.message);
           } else {
-            loggerApi.error('Registration failed');
+            loggerApi.error('Registration failed.');
           }
         }
       }
 
-      function loginUser() {
+      function loginUser(form) {
         authService.login(vm.login.username, vm.login.password).
         then(onSuccess, onError);
 
         function onSuccess(data) {
-          resetForm(vm.login, vm.login);
-          loggerApi.success('Login succeeded');
+          resetForm(form);
+          loggerApi.success('Login succeeded.');
         }
 
         function onError(error) {
-          loggerApi.error('Wrong username or password');
+          if (error === 'Unauthorized') {
+            loggerApi.error('Wrong username or password.');
+            return;
+          }
+          loggerApi.error('Error on login.');
         }
       }
 
@@ -72,14 +76,9 @@
         }
       }
 
-      function resetForm(form, model) {
+      function resetForm(form) {
         form.$setPristine();
         form.$setUntouched();
-        for (var key in model) {
-          if (model.hasOwnProperty(key) && key.indexOf('$') !== 0) {
-            model[key] = '';
-          }
-        }
       }
     }
   }
