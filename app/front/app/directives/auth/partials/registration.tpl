@@ -1,4 +1,4 @@
-<md-content class="md-padding">
+<md-content>
   <form layout="column" name="vm.registrationForm" layout-fill ng-submit="vm.createUser()">
     <md-input-container>
       <label>Username</label>

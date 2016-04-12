@@ -5,7 +5,7 @@
     .module('app.auth')
     .directive('authForm', authForm);
 
-  function authForm() {
+  function authForm($http, loggerApi, authService) {
     var directive = {
       controller: authController,
       controllerAs: 'vm',
@@ -18,7 +18,7 @@
 
     return directive;
 
-    function authController(loggerApi, $http) {
+    function authController() {
       var vm = this;
       vm.createUser = createUser;
       vm.loginUser = loginUser;
@@ -27,38 +27,41 @@
       init();
 
       function createUser() {
-        vm.method = 'POST';
-        vm.url = '/users';
-        vm.user = {
+        var user = {
           username: vm.registration.username,
           password: vm.registration.password,
           email: vm.registration.email
         };
-        $http({method: vm.method, url: vm.url, data: vm.user}).
-          then(function successCallback(response) {
-            resetForm(vm.registrationForm, vm.registration);
-            loggerApi.success('User successfully registered');
-          }, function errorCallback(response) {
+
+        authService.register(user).then(onSuccess, onError);
+
+        function onSuccess(data) {
+          resetForm(vm.registrationForm, vm.registration);
+          loggerApi.success('User successfully registered');
+        }
+        function onError(error) {
+          if (error.message) {
+            loggerApi.error(error.message);
+          } else {
             loggerApi.error('Registration failed');
-          });
+          }
+        }
       }
 
       function loginUser() {
-        vm.method = 'POST';
-        vm.url = '/login';
-        vm.user = {
-          username: vm.login.username,
-          password: vm.login.password
-        };
+        authService.login(vm.login.username, vm.login.password).
+        then(onSuccess, onError);
 
-        $http({method: vm.method, url: vm.url, data: vm.user}).
-          then(function successCallback(response) {
-            resetForm(vm.login, vm.login);
-            loggerApi.success('Login succeeded');
-          }, function errorCallback(response) {
-            loggerApi.error('Login failed');
-          });
+        function onSuccess(data) {
+          resetForm(vm.login, vm.login);
+          loggerApi.success('Login succeeded');
+        }
+
+        function onError(error) {
+          loggerApi.error('Wrong username or password');
+        }
       }
+
       function init() {
         vm.currentState = 'login';
       }
