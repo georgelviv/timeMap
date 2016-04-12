@@ -5,16 +5,10 @@
     .module('app.main')
     .controller('MainCtrl', MainController);
 
-  function MainController(eventsList, $mdSidenav) {
+  function MainController(eventsList) {
     var vm = this;
-    vm.sideBarID = 'right';
-    vm.showSideBar = showSideBar;
+    vm.sidebarState = null;
     init();
-
-    function showSideBar(state) {
-      vm.sidebarState = state;
-      $mdSidenav(vm.sideBarID).toggle();
-    }
 
     function init() {
       eventsList.get();

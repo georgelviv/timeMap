@@ -10,7 +10,8 @@
       'app.auth',
       'app.timeline',
       'app.sidebar',
-      'app.events'
+      'app.events',
+      'app.topbar'
     ]);
 
 })();

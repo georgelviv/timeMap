@@ -2,7 +2,7 @@ var server = require('../index'),
     db = require('./../../db'),
     expressSession = require('express-session'),
     passport = require('passport'),
-    localStrategy = require('passport-local' ).Strategy;
+    LocalStrategy = require('passport-local' ).Strategy;
 
 var auth = {
   init: init
@@ -18,188 +18,97 @@ function init() {
   }
   isInited = true;
 
-  server.app.use(expressSession({
+  var app = server.app;
+  var User = db.models.User;
+
+  app.use(expressSession({
     secret: Math.random().toString(36).replace(/[^a-z]+/g, ''),
-    cookie: {
-      path: '/',
-      httpOnly: true,
-      secure: false
-    },
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
   }));
 
-  server.app.use(passport.initialize());
-  server.app.use(passport.session());
-  // Db related
-  server.app.post('/login', onLogin);
-  server.app.post('/users', createUser);
-  server.app.get('/users', getUsers);
-  server.app.get('/users/:id' , getUserById);
-  server.app.delete('/users/:id' , deleteUserById);
+  app.use(passport.initialize());
+  app.use(passport.session());
 
+  passport.use(new LocalStrategy(User.authenticate()));
+  passport.serializeUser(User.serializeUser());
+  passport.deserializeUser(User.deserializeUser());
 
-  // define default 'local' strategy, used for login
-  passport.use(new localStrategy(loginCallback));
+  app.post('/user/login', passport.authenticate('local'), onLogin);
+  app.get('/user/logout', onLogout);
+  app.post('/user/register', onRegister);
+  app.get('/user/status', onStatus);
 
-  // define 'signup' strategy, used for login
-  passport.use('signup', new localStrategy({passReqToCallback : true}, signupCallback));
-
-  passport.serializeUser(serializeUser);
-  passport.deserializeUser(deserializeUser);
-}
-
-function getUsers(req, res){
-  db.models.User.find({}, function(err, users){
-   res.send(users);
- });
-}
-
-function deleteUserById(req, res){
-  var id = req.params.id;
-  db.models.User.remove({ _id: id }, function (err) {
-      if(err) {
-          res.send(err);
-      } else {
-          console.log('Deleting user: ' + id);
-          res.send('Success');
-      }
-  });
-}
-
-function getUserById(req, res){
-  var id = req.params.id;
-  db.models.User.find({ _id: id }, function (err, user) {
-      if(err) {
-          res.send(err);
-      } else {
-          res.send(user);
-      }
-  });
-}
-
-function onLogin(req, res) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) {
-      return res.status(500).json({
-        err:err,
-        sessionId: req.session.id
-      });
-    }
-    if (!user) {
-      return res.status(401).json({
-        err: info,
-        sessionId: req.session.id
-        });
-    }
-    req.login(user,  function(err) {
-      if (err) {
-        return res.status(500).json({
-          err: 'Could not login user',
-          sessionId: req.session.id
-        });
-      }
+  function onStatus(req, res) {
+    if (!req.isAuthenticated()) {
       res.status(200).json({
-        user: user,
-        sessionId: req.session.id
+        status: false
       });
-    });
-  })(req, res);
-
-}
-
-function createUser(req, res) {
-  var errors = formValidation(req, res);
-  if (errors) {
-    res.status(400).json({
-          err: errors.map(function (err){
-              return err.msg;
-            }).join('; '),
-          sessionId: req.session.id
-        });
-    return;
+      return;
+    } else {
+      res.status(200).json({
+        status: true,
+        user: {
+          username: req.user.username,
+          email: req.user.email,
+          id: req.user._id,
+          role: req.user.role
+        }
+      });
+    }
   }
-  passport.authenticate('signup', function(err, user, info) {
-    if (err) {
-      return res.status(500).json({
-        err:err,
-        sessionId: req.session.id
-      });
-    }
-    if (!user) {
-      return res.status(400).json({
-        err: info,
-        sessionId: req.session.id
-        });
-    }
-    req.login(user,  function(err) {
-      if (err) {
-        return res.json( {
-          err: 'Could not login user',
-          sessionId: req.session.id
-        });
+
+  function onLogin(req, res) {
+    res.status(200).json({
+      status: 'Login successful',
+      user: {
+        username: req.user.username,
+        email: req.user.email,
+        id: req.user._id,
+        role: req.user.role
       }
-      res.status(201).json({
-        user: user,
-        sessionId: req.session.id
-      });
-    });
-  })(req, res);
-}
-
-function loginCallback(username, password, authCheckDone) {
-      db.models.User.findOne({ username: username }, function(err, user) {
-        if (err) {
-          return authCheckDone(err);
-        }
-        if (!user) {
-          return authCheckDone(null, false, 'No such user');
-        }
-        if (password !== user.password) {
-          return authCheckDone(null, false, 'Incorrect password.');
-        }
-        authCheckDone(null, user);
-
-      });
-    }
-// the 'verify' function for 'signup' strategy
-function signupCallback(req, username, password, authCheckDone) {
-  db.models.User.findOne({username: username}, function(err, existUser) {
-    if (err) {
-      return authCheckDone(err);
-    }
-    if (existUser) {
-      return authCheckDone(null,
-        false,
-        'User ' + username + ' already exists.');
-    }
-    // it's safe, now create the user account
-    var userBody = req.body;
-    var user = new db.models.User(userBody).save( function(err, user) {
-      if (err) {
-        return authCheckDone(err);
-      }
-      if (!user) {
-        return authCheckDone('Failed on create user :(');
-      }
-      authCheckDone(null, user);
-    });
-
-  });
-}
-function formValidation(req, res){
-  req.checkBody('username', 'Username can not be empty').notEmpty();
-  req.assert('password', 'Mininum 8 characters required').len(8);
-  req.checkBody('email', 'Enter a valid email address').isEmail();
-  return req.validationErrors();
-
-}
-function deserializeUser(id, done) {
-    db.models.User.findById(id, function (err, user) {
-      done(err, user);
     });
   }
 
-function serializeUser(user, done) {
-  done(null, user.id);
+  function onLogout(req, res) {
+    req.logout();
+    res.status(200).json({
+      status: 'Bye!'
+    });
+  }
+
+  function onRegister(req, res) {
+    if (checkCorrectBody(req.body)) {
+      res.send('Pass correct body params');
+    }
+    User.register(new User({
+      username: req.body.username,
+      email: req.body.email
+    }), req.body.password, onRegisterCb);
+
+    function onRegisterCb(error, user) {
+      if (error) {
+        res.send(error);
+        return;
+      }
+      passport.authenticate('local')(req, res, function () {
+        res.status(200).json({
+          status: 'Registered',
+          user: {
+            username: req.user.username,
+            email: req.user.email,
+            id: req.user._id,
+            role: req.user.role
+          }
+        });
+      });
+    }
+  }
+
+  function checkCorrectBody(body) {
+    var username = typeof body.username !== 'string';
+    var email = typeof body.email !== 'string';
+    var password = typeof body.password !== 'string';
+    return username && email && password;
+  }
 }

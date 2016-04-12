@@ -5,7 +5,8 @@
     .module('app.sidebar', [
       'app.event',
       'app.tags',
-      'app.eventList'
+      'app.eventList',
+      'app.authService'
     ]);
 
 })();
