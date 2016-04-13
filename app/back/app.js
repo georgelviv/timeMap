@@ -1,6 +1,9 @@
 var express     = require('express'),
     bodyParser  = require('body-parser'),
     validator   = require('express-validator'),
+    passport = require('passport'),
+    helmet = require('helmet'),
+    compression = require('compression'),
     config      = require('./config'),
     nconf       = require('nconf'),
     controllers = require('./controllers')
@@ -8,14 +11,23 @@ var express     = require('express'),
    // app        = express();
 
 
+
+
     config.init();
     app = express();
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
+    app.use(helmet());
+    app.use(compression());
     app.use(validator());
     app.use(express.static(nconf.get('frontPath') + '/'));
-    //auth = require('./auth').init();
-    //routes = require('./routes').init();
+   // auth = require('./auth').init();
+   // routes = require('./routes').init();
 
 app.use('/', require('./controllers'));
     server = {

@@ -1,12 +1,14 @@
 var express = require('express'),
-    router = express.Router();
-    eventCtrl = require('./event');
+    router = express.Router(),
+    eventCtrl = require('./event'),
+    userCtrl = require('./user');
 
 
 
 
 
 router.use('/event', eventCtrl);
+router.use('/user', userCtrl);
 
 
 
