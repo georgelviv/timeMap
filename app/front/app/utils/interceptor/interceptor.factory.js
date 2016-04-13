@@ -37,13 +37,11 @@
     }
 
     function requestError(error) {
-      loggerApi.error('HTTP Request error');
       return error;
     }
 
     function responseError(error) {
       hideSpinner(error.config.id);
-      loggerApi.error('HTTP Response error');
       return $q.reject(error);
     }
 
