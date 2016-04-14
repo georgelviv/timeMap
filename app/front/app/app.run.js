@@ -5,15 +5,19 @@
     .module('app')
     .run(AppRun);
 
-  function AppRun($rootScope, eventsService) {
+  function AppRun($rootScope, authService, eventsService) {
     $rootScope.$on('$routeChangeSuccess', onRouteChangeSuccess);
     $rootScope.$on('$routeChangeStart', onRouteChangeStart);
 
     function onRouteChangeSuccess(event, current, previous) {
       $rootScope.pageTitle = current.title;
     }
-    function onRouteChangeStart(event, current, previous) {
+
+    function onRouteChangeStart() {
       eventsService.fetchEvents();
+      if (authService.getUser() === null) {
+        authService.getUserStatus();
+      }
     }
   }
 })();

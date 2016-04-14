@@ -5,7 +5,7 @@
     .module('app.sidebar')
     .directive('sidebar', sidebarDirective);
 
-  function sidebarDirective() {
+  function sidebarDirective($rootScope, authService, AUTH_EVENTS) {
     var directive = {
       restrict: 'E',
       controller: sidebarCtrl,
@@ -18,21 +18,28 @@
     };
 
     return directive;
-  }
 
-  function sidebarCtrl($scope, $mdSidenav) {
-    $scope.addEvent = addEvent;
-    $scope.isAddEvent = false;
-    $scope.closeSideBar = closeSideBar;
+    function sidebarCtrl($scope, $mdSidenav) {
+      var sideBarID = 'right';
+      $scope.addEvent = addEvent;
+      $scope.isAddEvent = false;
+      $scope.closeSideBar = closeSideBar;
 
-    function addEvent() {
-      $scope.isAddEvent = !$scope.isAddEvent;
+      $rootScope.$on(AUTH_EVENTS.login, onUserLogin);
+
+      function addEvent() {
+        $scope.isAddEvent = !$scope.isAddEvent;
+      }
+
+      function onUserLogin() {
+        closeSideBar();
+      }
+
+      function closeSideBar() {
+        $mdSidenav(sideBarID).close();
+      }
+
     }
-
-    function closeSideBar() {
-      $mdSidenav($scope.sidebarId).close();
-    }
-
   }
 
 })();

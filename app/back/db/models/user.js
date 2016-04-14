@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    passportLocalMongoose = require('passport-local-mongoose');
 
 var userApi = {
   init: init
@@ -16,20 +16,23 @@ function init () {
   }
   isInited = true;
 
-  defineUserSchema();
-  userApi.model = mongoose.model('User', userApi.schema);
-  db = require('./../index');
-  db.models.User = userApi.model;
-}
-
-function defineUserSchema() {
-  userApi.schema = new Schema({
+  var Schema = mongoose.Schema;
+  var User = new Schema({
       username: {
           type: String,
           unique: true
       },
       password: String,
-      email: String
+      email: String,
+      role: {
+        type: String,
+        default: 'user'
+      }
   });
 
+  User.plugin(passportLocalMongoose);
+
+  userApi.model = mongoose.model('User', User);
+  db = require('./../index');
+  db.models.User = userApi.model;
 }

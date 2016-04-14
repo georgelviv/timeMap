@@ -42,6 +42,7 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "bower": "^1.7.7",
+    "compression": "^1.6.1",
     "express": "^4.13.3",
     "express-session": "~1.12.1",
     "helmet": "^1.3.0",
@@ -50,6 +51,7 @@
     "nconf": "^0.8.2",
     "passport": "^0.3.0",
     "passport-local": "~1.0.0",
+    "passport-local-mongoose": "^4.0.0",
     "socket.io": "^1.3.7"
   }
 }
