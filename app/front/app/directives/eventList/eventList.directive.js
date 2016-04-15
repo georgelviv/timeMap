@@ -60,7 +60,9 @@
       };
 
       vm.checkRightBtn = function(button, curEvents, allEvents) {
-        if (curEvents[curEvents.length - 1] === allEvents[allEvents.length - 1]) {
+        var lastCurrentEvent = curEvents[curEvents.length - 1];
+        var lastEvent = allEvents[allEvents.length - 1];
+        if (lastCurrentEvent === lastEvent) {
           vm.toogleBtn(button, true);
         } else {
           vm.toogleBtn(button, false);

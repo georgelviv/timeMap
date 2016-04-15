@@ -22,7 +22,7 @@
         vm.events = eventsService.getAllEvents();
         showData(vm.events);
       });
-       
+
       function getMapOptions() {
         return {
           zoom: 6,
