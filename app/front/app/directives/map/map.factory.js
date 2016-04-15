@@ -5,11 +5,10 @@
     .module('app.map')
     .factory('mapApi', mapApi);
 
-  function mapApi(dbEvents, loggerApi, eventsList) {
+  function mapApi(loggerApi, eventsService) {
 
     var mapActions = {
-      createMarker: createMarker,
-      getEvents: getEvents
+      createMarker: createMarker
     };
     return mapActions;
 
@@ -20,14 +19,6 @@
         map: mapEl,
         title: pos.title
       });
-    }
-
-    function getEvents(setData) {
-      dbEvents.get(success);
-
-      function success() {
-        setData(eventsList);
-      }
     }
   }
 })();

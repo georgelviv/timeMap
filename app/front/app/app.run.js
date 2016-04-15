@@ -5,7 +5,7 @@
     .module('app')
     .run(AppRun);
 
-  function AppRun($rootScope, authService) {
+  function AppRun($rootScope, authService, eventsService) {
     $rootScope.$on('$routeChangeSuccess', onRouteChangeSuccess);
     $rootScope.$on('$routeChangeStart', onRouteChangeStart);
 
@@ -14,6 +14,7 @@
     }
 
     function onRouteChangeStart() {
+      eventsService.fetchEvents();
       if (authService.getUser() === null) {
         authService.getUserStatus();
       }
