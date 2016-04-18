@@ -5,8 +5,7 @@
     .module('app.map', [
       'ngRoute',
       'utils.logger',
-      'app.event',
-      'app.events'
+      'app.event'
     ]);
 
 })();

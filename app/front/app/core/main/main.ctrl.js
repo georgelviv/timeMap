@@ -5,13 +5,12 @@
     .module('app.main')
     .controller('MainCtrl', MainController);
 
-  function MainController(eventsList) {
+  function MainController() {
     var vm = this;
     vm.sidebarState = null;
     init();
 
     function init() {
-      eventsList.get();
     }
   }
 
