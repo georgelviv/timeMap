@@ -3,12 +3,13 @@
 
   angular
     .module('app.auth')
-    .directive('authForm', authForm);
+    .directive('authForm', authForm)
+    .controller('AuthController', AuthController);
 
-  function authForm($http, loggerApi, authService) {
+  function authForm() {
     var directive = {
-      controller: authController,
-      controllerAs: 'vm',
+      controller: AuthController,
+      controllerAs: 'auth',
       templateUrl: 'directives/auth/auth.tpl',
       restrict: 'E',
       scope: {
@@ -17,69 +18,69 @@
     };
 
     return directive;
+  }
 
-    function authController() {
-      var vm = this;
-      vm.createUser = createUser;
-      vm.loginUser = loginUser;
-      vm.passportMatch = passportMatch;
-      vm.resetForm = resetForm;
-      init();
+  function AuthController($http, loggerApi, authService) {
+    var auth = this;
+    auth.createUser = createUser;
+    auth.loginUser = loginUser;
+    auth.passportMatch = passportMatch;
+    auth.resetForm = resetForm;
+    init();
 
-      function createUser(form) {
-        var user = {
-          username: vm.registration.username,
-          password: vm.registration.password,
-          email: vm.registration.email
-        };
+    function createUser(form) {
+      var user = {
+        username: auth.registration.username,
+        password: auth.registration.password,
+        email: auth.registration.email
+      };
 
-        authService.register(user).then(onSuccess, onError);
+      authService.register(user).then(onSuccess, onError);
 
-        function onSuccess(data) {
-          resetForm(form);
-          loggerApi.success('User successfully registered.');
-        }
-        function onError(error) {
-          if (error.message) {
-            loggerApi.error(error.message);
-          } else {
-            loggerApi.error('Registration failed.');
-          }
-        }
+      function onSuccess(data) {
+        resetForm(form);
+        loggerApi.success('User successfully registered.');
       }
-
-      function loginUser(form) {
-        authService.login(vm.login.username, vm.login.password).
-        then(onSuccess, onError);
-
-        function onSuccess(data) {
-          resetForm(form);
-          loggerApi.success('Login succeeded.');
-        }
-
-        function onError(error) {
-          if (error === 'Unauthorized') {
-            loggerApi.error('Wrong username or password.');
-            return;
-          }
-          loggerApi.error('Error on login.');
+      function onError(error) {
+        if (error.message) {
+          loggerApi.error(error.message);
+        } else {
+          loggerApi.error('Registration failed.');
         }
       }
+    }
 
-      function init() {
-        vm.currentState = 'login';
+    function loginUser(form) {
+      authService.login(auth.login.username, auth.login.password).
+      then(onSuccess, onError);
+
+      function onSuccess(data) {
+        resetForm(form);
+        loggerApi.success('Login succeeded.');
       }
 
-      function passportMatch() {
-        if (vm.registration) {
-          return vm.registration.password === vm.registration.confirmPassword;
+      function onError(error) {
+        if (error === 'Unauthorized') {
+          loggerApi.error('Wrong username or password.');
+          return;
         }
+        loggerApi.error('Error on login.');
       }
+    }
 
-      function resetForm(form) {
-        form.$setPristine();
-        form.$setUntouched();
+    function init() {
+      auth.currentState = 'login';
+    }
+
+    function passportMatch() {
+      if (auth.registration) {
+        return auth.registration.password === auth.registration.confirmPassword;
       }
+    }
+
+    function resetForm(form) {
+      form.$setPristine();
+      form.$setUntouched();
     }
   }
 })();

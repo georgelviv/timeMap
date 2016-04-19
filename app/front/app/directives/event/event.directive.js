@@ -5,7 +5,7 @@
     .module('app.event')
     .directive('event', eventDirective);
 
-  function eventDirective(eventsList, eventsService) {
+  function eventDirective(eventsService, $mdSidenav) {
     var directive = {
       controller: eventCtrl,
       controllerAs: 'vm',
@@ -49,16 +49,22 @@
         };
       }
 
-      function resetForm() {
-        vm.form.$setPristine();
-        vm.form.$setUntouched();
+      function resetForm(form) {
+        form.$setPristine();
+        form.$setUntouched();
       }
 
-      function submitEvent() {
+      function closeSidebar() {
+        var sideBarID = 'right';
+        $mdSidenav(sideBarID).close();
+      }
+
+      function submitEvent(form) {
         eventsService.addEvent(vm.editEvent).then(function() {
           loggerApi.success('Event posted');
           setEditDefault();
-          resetForm();
+          resetForm(form);
+          closeSidebar();
         });
       }
 

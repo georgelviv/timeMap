@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('app.eventList', ['app.events', 'ngMaterial']);
+    .module('app.eventList', ['ngMaterial']);
 
 })();
