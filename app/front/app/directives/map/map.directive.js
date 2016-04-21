@@ -3,54 +3,50 @@
 
   angular
     .module('app.map')
+    .controller('MapCtrl', MapCtrl)
     .directive('map', initMap);
 
-  function initMap($rootScope, mapApi, eventsService) {
+  function initMap() {
     var mapDirective = {
       restrict: 'E',
       replace: true,
-      controller: mapCtrl,
+      controller: MapCtrl,
       templateUrl: 'directives/map/map.tpl'
     };
     return mapDirective;
+  }
 
-    function mapCtrl($scope) {
-      var vm = this;
-      var mapBlock = document.getElementById('map-block');
-      var map = new google.maps.Map(mapBlock, getMapOptions());
-      $rootScope.$on('app-events-fetched', function() {
-        vm.events = eventsService.getAllEvents();
-        showData(vm.events);
-      });
+  function MapCtrl($rootScope, mapApi, eventsService) {
+    var vm = this;
+    var map = mapApi.createMap(document.getElementById('map-block'));
 
-      function getMapOptions() {
-        return {
-          zoom: 6,
-          center: new google.maps.LatLng(48.379433, 31.16558),
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-      }
+    $rootScope.$on('app-events-fetched', onEventsFetch);
+    mapApi.onMapClick(onMapClick);
 
-      google.maps.event.addListener(map, 'click', function(e) {
-        console.log(e.latLng.lat());
-        console.log(e.latLng.lng());
+    function onEventsFetch() {
+      vm.events = eventsService.getAllEvents();
+      showData(vm.events);
+    }
+
+    function onMapClick(e) {
+      console.log(e.latLng.lat());
+      console.log(e.latLng.lng());
+      mapApi.createMarker({
+        lat: e.latLng.lat(),
+        lng: e.latLng.lng(),
+        title: 'event'
+      }, map);
+    }
+
+    function showData(data) {
+      angular.forEach(data, function(event, i) {
         mapApi.createMarker({
-          lat: e.latLng.lat(),
-          lng: e.latLng.lng(),
-          title: 'event'
-        }, map);
-      });
-
-      function showData(data) {
-        angular.forEach(data, function(event, i) {
-          mapApi.createMarker({
-            lat: event.coordinates.latitude,
-            lng: event.coordinates.longitude,
-            title: event.title
-          }, map);
-
+          lat: event.coordinates.latitude,
+          lng: event.coordinates.longitude,
+          title: event.title
         });
-      }
+      });
     }
   }
+
 })();
