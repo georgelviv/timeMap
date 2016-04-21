@@ -69,6 +69,7 @@
         "afterEach": false,
         "crypto": false,
         "google": false,
-        "vis": false
+        "vis": false,
+        "MarkerClusterer": false
     }
 }

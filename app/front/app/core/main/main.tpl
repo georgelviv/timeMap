@@ -4,7 +4,10 @@
   </header>
   <section class="content" flex="grow" layout="row">
     <map></map>
-    <sidebar state="vm.sidebarState" sidebar-id="vm.sideBarID"></sidebar>
+    <md-button ng-show="vm.isLogged" class="md-fab add-event-btn" aria-label="Add Event"
+               ng-click="vm.showSideBar('event')">
+      <md-icon>add</md-icon>
+    </md-button>
   </section>
   <time-line></time-line>
   <footer>
@@ -16,4 +19,5 @@
       </div>
     </md-toolbar>
   </footer>
+  <sidebar state="vm.sidebarState" sidebar-id="vm.sideBarID"></sidebar>
 </section>

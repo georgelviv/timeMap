@@ -8,8 +8,8 @@
           <span ng-show="state === 'login'">
             Sign In / Sign up
           </span>
-          <span ng-show="state === 'tags'">
-            Tags
+          <span ng-show="state === 'events'">
+            Events
           </span>
         </h2>
         <span flex></span>
@@ -26,7 +26,7 @@
       <div ng-show="state === 'login'">
         <auth-form></auth-form>
       </div>
-      <div ng-show="state === 'tags'">
+      <div ng-show="state === 'events'">
         <tags></tags>
         <event-list></event-list>
       </div>
