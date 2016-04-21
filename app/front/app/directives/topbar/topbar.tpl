@@ -4,14 +4,9 @@
       <md-button ng-href="/#/" aria-label="logo" class="logo"></md-button>
     </div>
     <div flex="80" layout="row" layout-align="end center">
-      <div ng-show="!!user">
-        <md-button class="md-raised" ng-click="showSideBar('tags')">
-          tags
-        </md-button>
-      </div>
-      <div ng-show="!!user">
-        <md-button class="md-raised" ng-click="showSideBar('event')">
-          create event
+      <div>
+        <md-button class="md-raised" ng-click="showSideBar('events')">
+          Events
         </md-button>
       </div>
       <div ng-hide="!!user">

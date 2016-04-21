@@ -5,12 +5,28 @@
     .module('app.main')
     .controller('MainCtrl', MainController);
 
-  function MainController() {
+  function MainController($rootScope, $mdSidenav, AUTH_EVENTS, authService) {
     var vm = this;
+    var sideBarID = 'right';
     vm.sidebarState = null;
-    init();
+    vm.showSideBar = showSideBar;
 
-    function init() {
+    vm.isLogged = authService.isLoggedIn();
+
+    $rootScope.$on(AUTH_EVENTS.login, onUserLogin);
+    $rootScope.$on(AUTH_EVENTS.logout, onUserLogout);
+
+    function onUserLogin() {
+      vm.isLogged = authService.isLoggedIn();
+    }
+
+    function onUserLogout() {
+      vm.isLogged = null;
+    }
+
+    function showSideBar(state) {
+      vm.sidebarState = state;
+      $mdSidenav(sideBarID).toggle();
     }
   }
 
