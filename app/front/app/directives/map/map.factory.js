@@ -45,7 +45,8 @@
 
     function createMap(el, mapOpt) {
       mapObj.map = new google.maps.Map(el, mapOpt || mapObj.mapOptions);
-      mapObj.mc = new MarkerClusterer(mapObj.map, mapObj.markers, mapObj.mcOptions);
+      mapObj.mc = new MarkerClusterer(mapObj.map,
+        mapObj.markers, mapObj.mcOptions);
     }
   }
 })();
