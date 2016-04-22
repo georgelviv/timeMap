@@ -44,8 +44,16 @@
     }
 
     function deleteEvent(id) {
-      $http.delete(EVENTS_API + '?id=' + id).then(function(response) {
-        return response;
+      var deferred = $q.defer();
+      angular.forEach(items, function(item, index) {
+        if (item._id === id) {
+          items.splice(index, 1);
+          $http.delete(EVENTS_API + '?id=' + id).then(function(response) {
+            return deferred.promise;
+          });
+          $rootScope.$emit('app-events-fetched');
+          deferred.resolve(items);
+        }
       });
     }
   }

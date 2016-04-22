@@ -6,6 +6,7 @@
     .directive('map', initMap);
 
   function initMap($rootScope, mapApi, eventsService) {
+    var markers = [];
     var mapDirective = {
       restrict: 'E',
       replace: true,
@@ -19,8 +20,8 @@
       var mapBlock = document.getElementById('map-block');
       var map = new google.maps.Map(mapBlock, getMapOptions());
       $rootScope.$on('app-events-fetched', function() {
-        vm.events = eventsService.getAllEvents();
-        showData(vm.events);
+        markers = eventsService.getAllEvents();
+        showData(markers);
       });
 
       function getMapOptions() {
@@ -34,14 +35,16 @@
       google.maps.event.addListener(map, 'click', function(e) {
         console.log(e.latLng.lat());
         console.log(e.latLng.lng());
-        mapApi.createMarker({
+        var marker = mapApi.createMarker({
           lat: e.latLng.lat(),
           lng: e.latLng.lng(),
           title: 'event'
         }, map);
+        console.log(marker.setMap(map));
       });
 
       function showData(data) {
+        console.log(data.length);
         angular.forEach(data, function(event, i) {
           mapApi.createMarker({
             lat: event.coordinates.latitude,

@@ -68,6 +68,9 @@
           vm.toogleBtn(button, false);
         }
       };
+      vm.deleteEvent = function(id) {
+        eventsService.deleteEvent(id);
+      };
     }
   }
 })();

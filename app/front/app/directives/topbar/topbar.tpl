@@ -6,7 +6,7 @@
     <div flex="80" layout="row" layout-align="end center">
       <div ng-show="!!user">
         <md-button class="md-raised" ng-click="showSideBar('tags')">
-          tags
+          Events
         </md-button>
       </div>
       <div ng-show="!!user">

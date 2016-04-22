@@ -19,6 +19,7 @@
         map: mapEl,
         title: pos.title
       });
+      return marker;
     }
   }
 })();
