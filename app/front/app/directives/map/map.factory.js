@@ -41,14 +41,10 @@
         title: pos.title
       });
       mapObj.markers.push(marker);
-
       mapObj.mc.addMarker(marker);
-      console.log(mapObj.markers);
-      console.log( mapObj.mc);
     }
 
     function clearMarkers() {
-      console.log('clear');
       angular.forEach(mapObj.markers, function(marker) {
         marker.setMap(null);
       });
