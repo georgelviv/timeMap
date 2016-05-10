@@ -20,28 +20,42 @@
       var vm = this;
       var leftBtn = $('.events-arrow-left');
       var rightBtn = $('.events-arrow-right');
-
-      $rootScope.$on('app-events-fetched', function() {
-        vm.allEvents = eventsService.getAllEvents();
-        vm.showNext();
-      });
-
       vm.blockNum = 0;
       vm.blockSize = 10;
+      vm.startIndex = 0;
+      vm.endIndex = 0;
+      $rootScope.$on('app-events-fetched', function() {
+        vm.allEvents = eventsService.getAllEvents();
+        vm.updateEvents();
+      });
+
+      vm.updateEvents = function() {
+        var events = [];
+        if (vm.blockNum === 0) {
+          vm.showNext();
+        } else {
+          vm.events = vm.allEvents.slice(vm.startIndex, vm.endIndex);
+          if (vm.events.length === 0) {
+            vm.showPrev();
+          } else if ((vm.allEvents.length / vm.blockNum) - vm.blockSize > 0) {
+            vm.showNext();
+          }
+        }
+      };
 
       vm.showNext = function() {
-        var startIndex = vm.blockNum * vm.blockSize;
-        var endIndex = startIndex + vm.blockSize;
-        vm.events = vm.allEvents.slice(startIndex, endIndex);
+        vm.startIndex = vm.blockNum * vm.blockSize;
+        vm.endIndex = vm.startIndex + vm.blockSize;
+        vm.events = vm.allEvents.slice(vm.startIndex, vm.endIndex);
         vm.blockNum += 1;
         vm.checkRightBtn(rightBtn, vm.events, vm.allEvents);
         vm.checkLeftBtn(leftBtn);
       };
 
       vm.showPrev = function() {
-        var startIndex = (vm.blockNum - 2) * vm.blockSize;
-        var endIndex = startIndex + vm.blockSize;
-        vm.events = vm.allEvents.slice(startIndex, endIndex);
+        vm.startIndex = (vm.blockNum - 2) * vm.blockSize;
+        vm.endIndex = vm.startIndex + vm.blockSize;
+        vm.events = vm.allEvents.slice(vm.startIndex, vm.endIndex);
         vm.blockNum -= 1;
         vm.checkLeftBtn(leftBtn);
         vm.checkRightBtn(rightBtn, vm.events, vm.allEvents);
@@ -68,6 +82,7 @@
           vm.toogleBtn(button, false);
         }
       };
+
       vm.deleteEvent = function(id) {
         eventsService.deleteEvent(id);
       };
