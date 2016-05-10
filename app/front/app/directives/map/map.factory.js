@@ -9,7 +9,8 @@
     var mapActions = {
       createMarker: createMarker,
       createMap: createMap,
-      onMapClick: onMapClick
+      onMapClick: onMapClick,
+      clearMarkers: clearMarkers
     };
 
     var mapObj = {
@@ -41,6 +42,13 @@
       });
       mapObj.markers.push(marker);
       mapObj.mc.addMarker(marker);
+    }
+
+    function clearMarkers() {
+      angular.forEach(mapObj.markers, function(marker) {
+        marker.setMap(null);
+      });
+      mapObj.markers = [];
     }
 
     function createMap(el, mapOpt) {

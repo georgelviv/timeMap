@@ -19,16 +19,16 @@
   function MapCtrl($rootScope, mapApi, eventsService) {
     var vm = this;
     var map = mapApi.createMap(document.getElementById('map-block'));
-
+    var markers = [];
     $rootScope.$on('app-events-fetched', onEventsFetch);
-    mapApi.onMapClick(onMapClick);
+    mapApi.onMapClick(onMapClickHandler);
 
     function onEventsFetch() {
       vm.events = eventsService.getAllEvents();
       showData(vm.events);
     }
 
-    function onMapClick(e) {
+    function onMapClickHandler(e) {
       console.log(e.latLng.lat());
       console.log(e.latLng.lng());
       mapApi.createMarker({
@@ -39,6 +39,7 @@
     }
 
     function showData(data) {
+      mapApi.clearMarkers();
       angular.forEach(data, function(event, i) {
         mapApi.createMarker({
           lat: event.coordinates.latitude,

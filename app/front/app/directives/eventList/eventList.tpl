@@ -22,5 +22,4 @@
 			<i class="material-icons">keyboard_arrow_right</i>
 		</button>
 	</div>
-	{{$parent.data}}
 </div>
