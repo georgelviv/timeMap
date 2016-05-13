@@ -49,6 +49,7 @@
         marker.setMap(null);
       });
       mapObj.markers = [];
+      mapObj.mc.clearMarkers();
     }
 
     function createMap(el, mapOpt) {

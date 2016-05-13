@@ -14,6 +14,9 @@ var vendorArr = [
 	'toastr/toastr.js',
 	'vis/dist/vis.js'
 ];
+var scriptArr = [
+	'markercluster.js'
+];
 var filesArr = buildFilesArr();
 
 module.exports = vendorJsTask;
@@ -33,6 +36,10 @@ function buildFilesArr () {
 
 	vendorArr.forEach(function (value) {
 		filesArr.push(path.frontDir + '/vendor/' + value);
+	});
+
+	scriptArr.forEach(function (value) {
+		filesArr.push(path.frontDir + '/script/' + value);
 	});
 
 	return filesArr;
