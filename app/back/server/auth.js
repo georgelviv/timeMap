@@ -1,5 +1,5 @@
-var server = require('../index'),
-    db = require('./../../db'),
+var server = require('./index'),
+    db = require('./../db'),
     expressSession = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local' ).Strategy;

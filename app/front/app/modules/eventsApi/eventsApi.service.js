@@ -45,7 +45,7 @@
 
     function deleteEvent(id) {
       var deferred = $q.defer();
-      $http.delete(EVENTS_API + '?id=' + id).then(function(response) {
+      $http.delete(EVENTS_API + '/' + id).then(function(response) {
         angular.forEach(items, function(item, index) {
           if (item._id === id) {
             items.splice(index, 1);

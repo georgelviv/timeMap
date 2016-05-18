@@ -17,17 +17,9 @@ function init () {
   }
 
   isInited = true;
-  defineModels();
+  db.models.User = require('./models/user');
+  db.models.Event = require('./models/event');
   mongoose.connect(config.get('db:' + config.get('NODE_ENV') + ':uri'), cbConnect);
-}
-
-function defineModels () {
-  var userModel, eventModel;
-  
-  userModel = require('./models/user');
-  userModel.init();
-  eventModel = require('./models/event');
-  eventModel.init();
 }
 
 function cbConnect (err) {

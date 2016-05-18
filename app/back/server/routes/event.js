@@ -1,52 +1,126 @@
-var server = require('../index'),
-    db = require('./../../db');
+var express = require('express');
+var router = express.Router();
 
-var routeEvent = {
-  init: init
-};
+var db = require('./../../db');
 
-var isInited = false;
+router.route('/event')
+.get(onEventsGet)
 
-module.exports = routeEvent;
+router.route('/event/:id')
+.post(onEventPost)
+.put(onEventPut)
+.delete(onEventDelete);
 
-function init() {
-  if (isInited) {
-    return;
-  }
-  isInited = true;
-
-  server.app.get('/event', onEventsGet);
-  server.app.post('/event', onEventPost);
-  server.app.put('/event', onEventPut);
-  server.app.delete('/event', onEventDelete);
-
-}
+module.exports = router;
 
 function onEventDelete(req, res) {
-  db.event.delete(req.query.id, cb.bind(this, res));
+  var id = req.params.id;
+  if (!id) {
+    cb(res, 'Event id is required!');
+    return;
+  }
+
+  db.models.Event.findByIdAndRemove(id, onRemoved);
+
+  function onRemoved(err) {
+    if (err) {
+      cb(res, err);
+      return;
+    }
+    cb(res, null, 'removed event:' + id);
+  }
 }
 
 function onEventPut(req, res) {
   var data = {
-    id: req.query.id,
+    id: req.params.id,
     title: req.body.title,
     description: req.body.description,
-    date: req.body.date
+    date: req.body.date,
+    coordinates: req.body.coordinates
   };
-  db.event.update(data, cb.bind(this, res));
+
+  if (!data.id) {
+    cb('Event id is required!');
+    return;
+  }
+
+  db.models.Event.findById(data.id, onFind);
+
+  function onFind(err, event) {
+    if (err) {
+      cb(err);
+      return;
+    }
+    event.title = data.title;
+    event.description = data.description;
+    event.date = data.date;
+    event.coordinates = date.coordinates;
+    event.save(onSave);
+
+    function onSave(err) {
+      if (err) {
+        cb(res, err);
+        return;
+      }
+      cb(res, null, data);
+    }
+  }
 }
 
 function onEventPost(req, res) {
-  var event = {
+  var data = {
     title: req.body.title,
     description: req.body.description,
-    date: req.body.date
+    date: req.body.date,
+    coordinates: req.body.coordinates
   };
-  db.event.add(req.body, cb.bind(this, res));
+
+  if (!data.title) {
+    cb(res, 'Event title is required!');
+    return;
+  }
+
+  if (!data.date) {
+    cb(res, 'Event date is required!');
+    return;
+  }
+
+  if (!data.coordinates.latitude) {
+    cb(res, 'Event latitude is required!');
+    return;
+  }
+
+  if (!data.coordinates.longitude) {
+    cb(res, 'Event longitude is required!');
+    return;
+  }
+
+  var event = db.models.Event(data);
+  event.save(onSave);
+
+  function onSave(err) {
+    if (err) {
+      cb(res, err);
+      return;
+    }
+    var eventData = data;
+    eventData._id = event._id;
+    cb(res, null, eventData);
+  }
+
 }
 
 function onEventsGet(req, res) {
-  db.event.get('', cb.bind(this, res));
+  db.models.Event.find({}, onFind);
+
+  function onFind(err, events) {
+    if (err) {
+      cb(res, err);
+      return;
+    }
+    cb(res, null, events);
+  }
 }
 
 function cb(res, err, data) {
