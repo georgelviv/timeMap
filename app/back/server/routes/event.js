@@ -5,9 +5,9 @@ var db = require('./../../db');
 
 router.route('/event')
 .get(onEventsGet)
+.post(onEventPost)
 
 router.route('/event/:id')
-.post(onEventPost)
 .put(onEventPut)
 .delete(onEventDelete);
 
@@ -49,7 +49,7 @@ function onEventPut(req, res) {
 
   function onFind(err, event) {
     if (err) {
-      cb(err);
+      cb(res, err);
       return;
     }
     event.title = data.title;

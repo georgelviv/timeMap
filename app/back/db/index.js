@@ -19,6 +19,7 @@ function init () {
   isInited = true;
   db.models.User = require('./models/user');
   db.models.Event = require('./models/event');
+  db.models.Tag = require('./models/tag');
   mongoose.connect(config.get('db:' + config.get('NODE_ENV') + ':uri'), cbConnect);
 }
 
