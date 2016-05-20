@@ -42,6 +42,7 @@
       });
       mapObj.markers.push(marker);
       mapObj.mc.addMarker(marker);
+      return marker;
     }
 
     function clearMarkers() {

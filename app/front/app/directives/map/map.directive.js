@@ -16,8 +16,10 @@
     return mapDirective;
   }
 
-  function MapCtrl($rootScope, mapApi, eventsService) {
+  function MapCtrl($rootScope, mapApi, eventsService,
+    sidebarFactory, $mdSidenav) {
     var vm = this;
+    var sideBarID = 'right';
     var map = mapApi.createMap(document.getElementById('map-block'));
     var markers = [];
     $rootScope.$on('app-events-fetched', onEventsFetch);
@@ -41,10 +43,15 @@
     function showData(data) {
       mapApi.clearMarkers();
       angular.forEach(data, function(event, i) {
-        mapApi.createMarker({
+        var marker = mapApi.createMarker({
           lat: event.coordinates.latitude,
           lng: event.coordinates.longitude,
           title: event.title
+        });
+        marker.addListener('click', function() {
+          var state = 'events-details';
+          sidebarFactory.setState(state, event);
+          $mdSidenav(sideBarID).toggle();
         });
       });
     }

@@ -5,7 +5,7 @@
     .module('app.eventList')
     .directive('eventList', eventListDirective);
 
-  function eventListDirective($rootScope, eventsService) {
+  function eventListDirective($rootScope, eventsService, sidebarFactory) {
     var directive = {
       restrict: 'E',
       replace: true,
@@ -81,6 +81,10 @@
         } else {
           vm.toogleBtn(button, false);
         }
+      };
+
+      vm.showSideBar = function(event, state) {
+        sidebarFactory.setState(state, event);
       };
 
       vm.deleteEvent = function(id) {
