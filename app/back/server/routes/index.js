@@ -1,6 +1,7 @@
 var server = require('../index'),
     db = require('./../../db'),
-    routeEvent = require('./event');
+    routeEvent = require('./event'),
+    routeTag = require('./tag');
 
 var route = {
   init: init
@@ -20,6 +21,7 @@ function init() {
   server.app.delete('/db', onCleanDB);
 
   server.app.use('/', routeEvent);
+  server.app.use('/', routeTag);
   server.app.get('*', handle404);
 }
 
