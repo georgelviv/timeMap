@@ -1,7 +1,7 @@
 <div>
 	<md-list>
 	<div class="events-title">Events</div>
-	    <md-list-item ng-repeat="event in vm.events" ng-click="goToPerson(event.title, $event)" class="noright">
+	    <md-list-item ng-repeat="event in vm.events" ng-click="vm.showSideBar(event, 'events-details')" class="noright">
 		    <i class="material-icons place-icon">place</i>
 		    <div class="event-details">
 		    	<h4 class="event-title">{{ event.title }}</h3>

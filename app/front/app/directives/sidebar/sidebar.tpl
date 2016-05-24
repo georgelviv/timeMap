@@ -11,6 +11,9 @@
           <span ng-show="state === 'events'">
             Events
           </span>
+          <span ng-show="state === 'events-details'">
+            Description
+          </span>
         </h2>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideBar()">
@@ -29,6 +32,10 @@
       <div ng-show="state === 'events'">
         <tags></tags>
         <event-list></event-list>
+      </div>
+      <div ng-show="state === 'events-details'" >
+        <h1>{{title}}</h1>
+        <div>{{description}}</div>
       </div>
     </md-content>
     <!--<div ng-show="vm.isAddEvent">-->

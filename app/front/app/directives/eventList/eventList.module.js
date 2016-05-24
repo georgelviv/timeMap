@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('app.eventList', ['ngMaterial']);
+    .module('app.eventList', ['ngMaterial', 'app.sidebar']);
 
 })();

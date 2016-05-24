@@ -24,8 +24,13 @@
       $scope.addEvent = addEvent;
       $scope.isAddEvent = false;
       $scope.closeSideBar = closeSideBar;
-
       $rootScope.$on(AUTH_EVENTS.login, onUserLogin);
+
+      $rootScope.$on('sidebar.change.state', function(event, value, item) {
+        $scope.state = value;
+        $scope.description = item.description;
+        $scope.title = item.title;
+      });
 
       function addEvent() {
         $scope.isAddEvent = !$scope.isAddEvent;
