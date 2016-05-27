@@ -2,8 +2,6 @@
   'use strict';
 
   angular
-    .module('app.eventsApi', [
-      'utils.logger'
-    ]);
+    .module('app.eventsApi', []);
 
 })();
