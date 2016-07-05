@@ -5,8 +5,11 @@
     .module('app.eventsApi')
     .factory('eventsService', eventsService);
 
-  function eventsService($http, $q, $timeout, $rootScope, EVENTS_API) {
+  function eventsService($http, $q, $timeout, $rootScope, EVENTS_API,
+                        timelineService) {
     var items = [];
+
+    $rootScope.$on('app-timeline-changed', onTimeLineChanged);
 
     return {
       getAllEvents: getAllEvents,
@@ -19,17 +22,22 @@
       return angular.copy(items);
     }
 
-    function fetchEvents() {
+    function onTimeLineChanged() {
+      fetchEvents();
+    }
+
+    function fetchEvents(isAll) {
       var deferred = $q.defer();
-      if (items.length === 0) {
-        $http.get(EVENTS_API).then(function(response) {
-          items = response.data;
-          deferred.resolve(items);
-          $rootScope.$emit('app-events-fetched');
-        });
-      } else {
-        deferred.resolve(items);
+      var reqUrl = EVENTS_API;
+      if (!isAll) {
+        var range = timelineService.getCurrent();
+        reqUrl += '?from=' + range.from + '&to=' + range.to;
       }
+      $http.get(reqUrl).then(function(response) {
+        items = response.data;
+        deferred.resolve(items);
+        $rootScope.$emit('app-events-fetched');
+      });
       return deferred.promise;
     }
 
@@ -56,5 +64,6 @@
         return deferred.promise;
       });
     }
+
   }
 })();

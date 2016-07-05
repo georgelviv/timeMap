@@ -5,7 +5,7 @@
     .module('app.timeline')
     .directive('timeLine', timelineDirective);
 
-  function timelineDirective(timelineApi) {
+  function timelineDirective(timelineApi, timelineService) {
     var directive = {
       restrict: 'E',
       replace: true,
@@ -32,6 +32,8 @@
       $('.zoom-out-btn').on('click', function() {
         timelineApi.zoom(timeline, 0.1);
       });
+
+      timelineService.init(timeline);
     }
   }
 })();
