@@ -112,7 +112,16 @@ function onEventPost(req, res) {
 }
 
 function onEventsGet(req, res) {
-  db.models.Event.find({}, onFind);
+  var query = {};
+  if (!isNaN(req.query.from)) {
+    query.date = {"$gt": new Date(+req.query.from)};
+  }
+  if (!isNaN(+req.query.to)) {
+    query.date = query.date || {};
+    query.date['$lt'] = new Date(+req.query.to);
+  }
+
+  db.models.Event.find(query, onFind);
 
   function onFind(err, events) {
     if (err) {

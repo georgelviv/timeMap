@@ -22,7 +22,7 @@
     function fetchTags() {
       var deferred = $q.defer();
       if (items.length === 0) {
-        $http.get(EVENTS_API).then(function(response) {
+        $http.get(TAGS_API).then(function(response) {
           items = response.data;
           deferred.resolve(items);
           $rootScope.$emit('app-tags-fetched');
@@ -33,9 +33,9 @@
       return deferred.promise;
     }
 
-    function addTags(event) {
+    function addTag(event) {
       var deferred = $q.defer();
-      $http.post(EVENTS_API, event).then(function(response) {
+      $http.post(TAGS_API, event).then(function(response) {
         items.push(response.data);
         $rootScope.$emit('app-tags-fetched');
         deferred.resolve(response.data);
@@ -43,9 +43,9 @@
       return deferred.promise;
     }
 
-    function deleteTags(id) {
+    function deleteTag(id) {
       var deferred = $q.defer();
-      $http.delete(EVENTS_API + '/' + id).then(function(response) {
+      $http.delete(TAGS_API + '/' + id).then(function(response) {
         angular.forEach(items, function(item, index) {
           if (item._id === id) {
             items.splice(index, 1);
