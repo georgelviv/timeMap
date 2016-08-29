@@ -31,6 +31,9 @@
       var reqUrl = EVENTS_API;
       if (!isAll) {
         var range = timelineService.getCurrent();
+        if (!range.from) {
+          return;
+        }
         reqUrl += '?from=' + range.from + '&to=' + range.to;
       }
       $http.get(reqUrl).then(function(response) {

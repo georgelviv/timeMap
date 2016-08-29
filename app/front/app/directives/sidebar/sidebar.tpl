@@ -30,7 +30,6 @@
         <auth-form></auth-form>
       </div>
       <div ng-show="state === 'events'">
-        <tags></tags>
         <event-list></event-list>
       </div>
       <div ng-show="state === 'events-details'" >

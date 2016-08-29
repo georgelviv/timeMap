@@ -87,7 +87,8 @@
         sidebarFactory.setState(state, event);
       };
 
-      vm.deleteEvent = function(id) {
+      vm.deleteEvent = function(e, id) {
+        e.stopPropagation();
         eventsService.deleteEvent(id);
       };
     }
